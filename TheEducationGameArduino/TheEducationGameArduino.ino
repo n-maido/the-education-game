@@ -1,4 +1,11 @@
 
+//LED pins
+const int yellowLed = 4;
+const int blueLed = 5;
+const int redLed = 6;
+const int greenLed = 7;
+
+
 //Buttons that don't change in the code.
 const int yellowButtonPin = 9;
 const int blueButtonPin = 10;
@@ -11,19 +18,29 @@ const int potentiometerWiper = A0;
 //Photoresistor Pin
 const int photoresistorPin = A1;
 
-//Button Variables
-int yellowBut;
-int blueBut;
-int greenBut;
-int redBut;
+//Button Variables; stores input values
+int yellowInput;
+int blueInput;
+int greenInput;
+int redInput;
 
-//Analog Variables
-double poten;
-double photoR;
+
+//Analog Variables to store input from sensors
+double potentInput;
+double photoInput;
 
 void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
+  
+  //set LEDs to output
+  pinMode(yellowLed, OUTPUT);
+  pinMode(blueLed, OUTPUT);
+  pinMode(redLed, OUTPUT);
+  pinMode(greenLed, OUTPUT);
+  
+  
+  //set buttons to input
   pinMode(yellowButtonPin, INPUT);
   pinMode(blueButtonPin, INPUT);
   pinMode(redButtonPin, INPUT);
@@ -34,11 +51,95 @@ void setup() {
 
 void loop() {
   // put your main code here, to run repeatedly:
-  yellowBut = digitalRead(yellowButtonPin);
-  blueBut = digitalRead(blueButtonPin);
-  redBut = digitalRead(redButtonPin);
-  greenBut = digitalRead(greenButtonPin);
+  //Read inputs
+  yellowInput = digitalRead(yellowButtonPin);
+  blueInput = digitalRead(blueButtonPin);
+  redInput = digitalRead(redButtonPin);
+  greenInput = digitalRead(greenButtonPin);
 
-  poten = analogRead(potentiometerWiper);
-  photoR = analogRead(photoresistorPin);
+  potentInput = analogRead(potentiometerWiper);
+  photoInput = analogRead(photoresistorPin);
+
+  //turn on LEDs when their corresponding buttons are pressed
+  turnOnLeds();
+
+  //packet the 6 inputs
+  packageInputs();
+  
+}
+
+//function to turn on LEDs when buttons are pressed
+void turnOnLeds(){
+  //yellow
+  if(yellowInput == HIGH){
+    digitalWrite(yellowLed, HIGH);
+  }
+  else{
+    digitalWrite(yellowLed, LOW);
+  }
+  //blue
+  if(blueInput == HIGH){
+    digitalWrite(blueLed, HIGH);
+  }
+  else{
+    digitalWrite(blueLed, LOW);
+  }
+  //red
+  if(redInput == HIGH){
+    digitalWrite(redLed, HIGH);
+  }
+  else{
+    digitalWrite(redLed, LOW);
+  }
+  //green
+  if(greenInput == HIGH){
+    digitalWrite(greenLed, HIGH);
+  }
+  else{
+    digitalWrite(greenLed, LOW);
+  }  
+}
+
+//function to package inputs
+void packageInputs(){
+  //yellow button (delimited by 'y')
+  Serial.print("y"); 
+  Serial.print(photoInput);
+  Serial.print("y");
+  Serial.println();
+
+  //blue button (delimited by 'b')
+  Serial.print("b"); 
+  Serial.print(photoInput);
+  Serial.print("b");
+  Serial.println();
+
+  //red button (delimited by 'r')
+  Serial.print("r"); 
+  Serial.print(photoInput);
+  Serial.print("r");
+  Serial.println();
+
+  //green button (delimited by 'g')
+  Serial.print("g"); 
+  Serial.print(photoInput);
+  Serial.print("g");
+  Serial.println();
+
+  //photoresistor (delimited by 'a')
+  Serial.print("a"); 
+  Serial.print(photoInput);
+  Serial.print("a");
+  Serial.println();
+
+  //potentiometer (delimited by 'z')
+  Serial.print("z"); 
+  Serial.print(potentInput);
+  Serial.print("z");
+  Serial.println();
+
+  //end of input
+  Serial.print("&");
+  Serial.println();
+  delay(1000);
 }
