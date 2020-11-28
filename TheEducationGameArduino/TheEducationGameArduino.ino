@@ -1,4 +1,11 @@
 
+//LED pins
+const int yellowLed = 4;
+const int blueLed = 5;
+const int redLed = 6;
+const int greenLed = 7;
+
+
 //Buttons that don't change in the code.
 const int yellowButtonPin = 9;
 const int blueButtonPin = 10;
@@ -17,6 +24,7 @@ int blueInput;
 int greenInput;
 int redInput;
 
+
 //Analog Variables to store input from sensors
 double potentInput;
 double photoInput;
@@ -25,6 +33,14 @@ void setup() {
   // put your setup code here, to run once:
   Serial.begin(9600);
   
+  //set LEDs to output
+  pinMode(yellowLed, OUTPUT);
+  pinMode(blueLed, OUTPUT);
+  pinMode(redLed, OUTPUT);
+  pinMode(greenLed, OUTPUT);
+  
+  
+  //set buttons to input
   pinMode(yellowButtonPin, INPUT);
   pinMode(blueButtonPin, INPUT);
   pinMode(redButtonPin, INPUT);
@@ -44,8 +60,48 @@ void loop() {
   potentInput = analogRead(potentiometerWiper);
   photoInput = analogRead(photoresistorPin);
 
-  //packet the 6 inputs
+  //turn on LEDs when their corresponding buttons are pressed
+  turnOnLeds();
 
+  //packet the 6 inputs
+  packageInputs();
+  
+}
+
+//function to turn on LEDs when buttons are pressed
+void turnOnLeds(){
+  //yellow
+  if(yellowInput == HIGH){
+    digitalWrite(yellowLed, HIGH);
+  }
+  else{
+    digitalWrite(yellowLed, LOW);
+  }
+  //blue
+  if(blueInput == HIGH){
+    digitalWrite(blueLed, HIGH);
+  }
+  else{
+    digitalWrite(blueLed, LOW);
+  }
+  //red
+  if(redInput == HIGH){
+    digitalWrite(redLed, HIGH);
+  }
+  else{
+    digitalWrite(redLed, LOW);
+  }
+  //green
+  if(greenInput == HIGH){
+    digitalWrite(greenLed, HIGH);
+  }
+  else{
+    digitalWrite(greenLed, LOW);
+  }  
+}
+
+//function to package inputs
+void packageInputs(){
   //yellow button (delimited by 'y')
   Serial.print("y"); 
   Serial.print(photoInput);
@@ -85,5 +141,5 @@ void loop() {
   //end of input
   Serial.print("&");
   Serial.println();
-  delay(100);
+  delay(1000);
 }
