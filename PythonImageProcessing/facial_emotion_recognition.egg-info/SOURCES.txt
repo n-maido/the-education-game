@@ -1,0 +1,13 @@
+MANIFEST.in
+README.md
+setup.py
+./facial_emotion_recognition/model/model.pkl
+facial_emotion_recognition/__init__.py
+facial_emotion_recognition/facial_emotion_recognition.py
+facial_emotion_recognition/networks.py
+facial_emotion_recognition.egg-info/PKG-INFO
+facial_emotion_recognition.egg-info/SOURCES.txt
+facial_emotion_recognition.egg-info/dependency_links.txt
+facial_emotion_recognition.egg-info/requires.txt
+facial_emotion_recognition.egg-info/top_level.txt
+facial_emotion_recognition/model/model.pkl
