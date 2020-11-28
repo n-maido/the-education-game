@@ -2,12 +2,14 @@ import processing.serial.*;
 
 Serial myPort;
 Welcome welc;
+correctAnswer corr;
 
 void setup() {
   size(800, 600);
   printArray(Serial.list());
   myPort = new Serial(this, Serial.list()[0], 9600);
   welc = new Welcome();
+  corr = new correctAnswer();
 }
 
 void draw() {
@@ -17,8 +19,13 @@ void draw() {
     println(inByte);
     
   }
-  welc.drawMe();
+  //welc.drawMe();
+  corr.drawMe();
 }
 void mouseClicked() {
-  println(welc.checkInput());
+  switch(welc.checkInput()) {
+    case 1:
+    case 2:
+    case 3:
+  }
 }
