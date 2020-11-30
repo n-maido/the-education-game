@@ -3,15 +3,17 @@ import processing.serial.*;
 Serial myPort;
 Welcome welc;
 correctAnswer corr;
-StringDict inputs;
+public StringDict inputs;
 
 void setup() {
   size(800, 600);
   printArray(Serial.list());
   myPort = new Serial(this, Serial.list()[0], 9600);
   welc = new Welcome();
+  welc.setupWelcome();
   corr = new correctAnswer();
   inputs = new StringDict();
+  frameRate(60);
 }
 
 void draw() {
@@ -22,8 +24,7 @@ void draw() {
     getInputOfSerial(inByte);
     
   }
-  //welc.drawMe();
-  corr.drawMe();
+  welc.drawMe();
 }
 void mouseClicked() {
   switch(welc.checkInput()) {
@@ -52,4 +53,8 @@ void getInputOfSerial(String inByte) {
   int tempPotent = inByte.indexOf("z");
   int tempEndPotent = inByte.indexOf("z", tempPotent);
   inputs.set("potentiometer", inByte.substring(tempPotent + 1, tempEndPotent - 1));
+}
+
+public void changeScene(String newScene) {
+  welc.currentScene = newScene;
 }

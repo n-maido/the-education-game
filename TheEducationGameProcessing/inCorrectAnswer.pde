@@ -1,4 +1,6 @@
 class inCorrectAnswer {
+  String previousScene;
+  
   void drawMe() {
     background(255, 0, 0);
     fill(0);
