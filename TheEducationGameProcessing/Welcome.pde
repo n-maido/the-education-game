@@ -26,11 +26,18 @@ class Welcome {
          if ((currentFC - previousFC) / 60 == 5) {
            currentScene = "";
          }
+      } else if (currentScene == "inCorr") {
+        inCorr.drawMe();
+        currentFC = frameCount;
+        if ((currentFC - previousFC) / 60 == 5) {
+          currentScene = "";
+        }
       } else if (currentScene == "math") {
         math.drawMe();
       } else if (currentScene == "fine") {
         fine.drawMe();
       } else if (currentScene == "emote") {
+        emote.drawMe();
       }
     } else{
       background(255);

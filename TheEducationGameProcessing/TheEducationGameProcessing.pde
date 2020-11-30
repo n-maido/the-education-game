@@ -27,11 +27,16 @@ void draw() {
   welc.drawMe();
 }
 void mouseClicked() {
-  switch(welc.checkInput()) {
+  if (welc.currentScene == "") {
+    welc.checkInput();
+  } else if (welc.currentScene == "emote") {
+    welc.emote.checkInput();
+  }
+  /*switch(welc.checkInput()) {
     case 1:
     case 2:
     case 3:
-  }
+  }*/
 }
 
 void getInputOfSerial(String inByte) {
@@ -57,4 +62,12 @@ void getInputOfSerial(String inByte) {
 
 public void changeScene(String newScene) {
   welc.currentScene = newScene;
+  welc.previousFC = frameCount;
+}
+
+void keyPressed() {
+  switch(welc.currentScene) {
+    case "math":
+      welc.math.mathKeyPressed(key);
+  }
 }
