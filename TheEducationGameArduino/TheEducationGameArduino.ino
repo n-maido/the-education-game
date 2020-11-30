@@ -103,64 +103,63 @@ void turnOnLeds(){
 //function to package inputs
 void packageInputs(){
   String serialOutput = "";
-  serialOutput += "y";
-  serialOutput += String(photoInput);
-  serialOutput += "y";
+  //serialOutput += "y";
+  //serialOutput += String(photoInput);
+  //serialOutput += "y";
   //yellow button (delimited by 'y')
-  //Serial.print("y"); 
-  //Serial.print(photoInput);
-  //Serial.print("y");
-  //Serial.println();
+  Serial.print("y"); 
+  Serial.print(photoInput);
+  Serial.print("y");
+  Serial.println();
 
-  serialOutput += "b";
-  serialOutput += String(photoInput);
-  serialOutput += "b";
+  //serialOutput += "b";
+  //serialOutput += String(photoInput);
+  //serialOutput += "b";
   //blue button (delimited by 'b')
-  //Serial.print("b"); 
-  //Serial.print(photoInput);
-  //Serial.print("b");
-  //Serial.println();
+  Serial.print("b"); 
+  Serial.print(photoInput);
+  Serial.print("b");
+  Serial.println();
 
-  serialOutput += "r";
-  serialOutput += String(photoInput);
-  serialOutput += "r";
+  //serialOutput += "r";
+  //serialOutput += String(photoInput);
+  //serialOutput += "r";
   //red button (delimited by 'r')
-  //Serial.print("r"); 
-  //Serial.print(photoInput);
-  //Serial.print("r");
-  //Serial.println();
+  Serial.print("r"); 
+  Serial.print(photoInput);
+  Serial.print("r");
+  Serial.println();
 
-  serialOutput += "g";
-  serialOutput += String(photoInput);
-  serialOutput += "g";
+  //serialOutput += "g";
+  //serialOutput += String(photoInput);
+  //serialOutput += "g";
   //green button (delimited by 'g')
-  //Serial.print("g"); 
-  //Serial.print(photoInput);
-  //Serial.print("g");
-  //Serial.println();
+  Serial.print("g"); 
+  Serial.print(photoInput);
+  Serial.print("g");
+  Serial.println();
 
-  serialOutput += "a";
-  serialOutput += String(photoInput);
-  serialOutput += "a";
+  //serialOutput += "a";
+  //serialOutput += String(photoInput);
+  //serialOutput += "a";
   //photoresistor (delimited by 'a')
-  //Serial.print("a"); 
-  //Serial.print(photoInput);
-  //Serial.print("a");
-  //Serial.println();
+  Serial.print("a"); 
+  Serial.print(photoInput);
+  Serial.print("a");
+  Serial.println();
 
-  serialOutput += "z";
-  serialOutput += String(potentInput);
-  serialOutput += "z";
+  //serialOutput += "z";
+  //serialOutput += String(potentInput);
+  //serialOutput += "z";
   //potentiometer (delimited by 'z')
-  //Serial.print("z"); 
-  //Serial.print(potentInput);
-  //Serial.print("z");
-  //Serial.println();
+  Serial.print("z"); 
+  Serial.print(potentInput);
+  Serial.print("z");
+  Serial.println();
 
-  serialOutput += "&";
+  //serialOutput += "&";
   //end of input
-  //Serial.print("&");
-  //Serial.println();
-  Serial.println(serialOutput);
+  Serial.print("&");
+  Serial.println();
   delay(1000);
 }
