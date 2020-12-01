@@ -32,11 +32,6 @@ void mouseClicked() {
   } else if (welc.currentScene == "emote") {
     welc.emote.checkInput();
   }
-  /*switch(welc.checkInput()) {
-    case 1:
-    case 2:
-    case 3:
-  }*/
 }
 
 void getInputOfSerial(String inByte) {
