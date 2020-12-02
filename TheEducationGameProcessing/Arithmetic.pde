@@ -58,6 +58,8 @@ class Arithmetic {
         answer += key;
       } else if (key == ENTER) {
         checkAnswer();
+      } else if (key == BACKSPACE) {
+        answer = answer.substring(0, answer.length()-1);
       }
     } catch(Exception e) {
     }

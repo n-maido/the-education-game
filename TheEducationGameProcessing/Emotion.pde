@@ -3,7 +3,7 @@ class Emotion {
   ArrayList<String> emotions = new ArrayList<String>();
   ArrayList<ArrayList<String>> emotionChoices = new ArrayList<ArrayList<String>>();
   int currentPhoto = 0;
-  String answerChosen;
+  String answerChosen = "";
   
   Emotion() {
     setupPhotos();
@@ -49,10 +49,12 @@ class Emotion {
       answerChosen = emotionChoices.get(currentPhoto).get(2);
       
     }
-    if(answerChosen == emotions.get(currentPhoto)) {
-      changeScene("corr");
-    } else {
-      changeScene("inCorr");
+    if (answerChosen != "") {
+      if(answerChosen == emotions.get(currentPhoto)) {
+        changeScene("corr");
+      } else {
+        changeScene("inCorr");
+      }
     }
   }
 }
