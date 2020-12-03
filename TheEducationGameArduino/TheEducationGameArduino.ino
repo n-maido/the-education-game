@@ -78,21 +78,21 @@ void turnOnLeds(){
     digitalWrite(yellowLed, LOW);
   }
   //blue
-  if(blueInput == HIGH){
+  if(blueInput == LOW){
     digitalWrite(blueLed, HIGH);
   }
   else{
     digitalWrite(blueLed, LOW);
   }
   //red
-  if(redInput == HIGH){
+  if(redInput == LOW){
     digitalWrite(redLed, HIGH);
   }
   else{
     digitalWrite(redLed, LOW);
   }
   //green
-  if(greenInput == HIGH){
+  if(greenInput == LOW){
     digitalWrite(greenLed, HIGH);
   }
   else{
@@ -161,5 +161,5 @@ void packageInputs(){
   //end of input
   Serial.print("&");
   Serial.println();
-  delay(1000);
+  delay(100);
 }
