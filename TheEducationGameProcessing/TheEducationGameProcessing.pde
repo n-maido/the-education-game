@@ -8,7 +8,7 @@ public StringDict inputs;
 void setup() {
   size(800, 600);
   printArray(Serial.list());
-  myPort = new Serial(this, Serial.list()[0], 9600);
+  myPort = new Serial(this, Serial.list()[3], 9600); //mod to serial port of my comp
   welc = new Welcome();
   welc.setupWelcome();
   corr = new correctAnswer();
@@ -37,7 +37,8 @@ void mouseClicked() {
 void getInputOfSerial(String inByte) {
   int tempYellow = inByte.indexOf("y");
   int tempEndYellow = inByte.indexOf("y", tempYellow);
-  inputs.set("yellow button", inByte.substring(tempYellow + 1, tempEndYellow - 1));
+  println("yellow starts at " + tempYellow + " and ends at " + tempEndYellow);
+  inputs.set("yellow button", inByte.substring(tempYellow + 1, tempEndYellow - 1)); //StringIndexOutOfBoundsException: tempYellow is index 0, tempEndYellow is index 0!
   int tempBlue = inByte.indexOf("b");
   int tempEndBlue = inByte.indexOf("b", tempBlue);
   inputs.set("blue button", inByte.substring(tempBlue + 1, tempEndBlue - 1));
