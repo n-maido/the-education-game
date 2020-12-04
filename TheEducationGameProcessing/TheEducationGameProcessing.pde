@@ -18,12 +18,13 @@ void setup() {
 
 void draw() {
   background(#ffffff);
-  while(myPort.available() > 0) {
+  if(myPort.available() > 0) { //changed from while to if, in order to print troubleshooting statement; draw is a loop anyways
     String inByte = myPort.readStringUntil('&');
     println(inByte);
     getInputOfSerial(inByte);
     
   }
+  else println("nothing available");//troubleshooting
   welc.drawMe();
 }
 void mouseClicked() {
@@ -37,13 +38,16 @@ void mouseClicked() {
 void getInputOfSerial(String inByte) {
   int tempYellow = inByte.indexOf("y");
   int tempEndYellow = inByte.indexOf("y", tempYellow);
+  //--troubleshooting--
   println("yellow starts at " + tempYellow + " and ends at " + tempEndYellow);
-  inputs.set("yellow button", inByte.substring(tempYellow + 1, tempEndYellow - 1)); //StringIndexOutOfBoundsException: tempYellow is index 0, tempEndYellow is index 0!
+  //inputs.set("yellow button", inByte.substring(tempYellow + 1, tempEndYellow - 1)); //StringIndexOutOfBoundsException: tempYellow is index 0, tempEndYellow is index 0!
   int tempBlue = inByte.indexOf("b");
   int tempEndBlue = inByte.indexOf("b", tempBlue);
-  inputs.set("blue button", inByte.substring(tempBlue + 1, tempEndBlue - 1));
+  println("blue starts at " + tempBlue + " and ends at " + tempEndBlue); //troubleshooting
+  //inputs.set("blue button", inByte.substring(tempBlue + 1, tempEndBlue - 1)); //Blue starts and ends at same index, and so on for the rest of the inputs
   int tempRed = inByte.indexOf("r");
   int tempEndRed = inByte.indexOf("r", tempRed);
+  println("red starts at " + tempRed + " and ends at " + tempEndRed); //troubleshooting
   inputs.set("red button", inByte.substring(tempRed + 1, tempEndRed - 1));
   int tempGreen = inByte.indexOf("g");
   int tempEndGreen = inByte.indexOf("g", tempGreen);
