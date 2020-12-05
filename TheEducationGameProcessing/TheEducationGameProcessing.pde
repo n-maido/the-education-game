@@ -4,11 +4,12 @@ Serial myPort;
 Welcome welc;
 correctAnswer corr;
 public StringDict inputs;
+byte[] inBuffer = new byte[255];
 
 void setup() {
   size(800, 600);
   printArray(Serial.list());
-  myPort = new Serial(this, Serial.list()[3], 9600); //mod to serial port of my comp
+  myPort = new Serial(this, Serial.list()[1], 9600); //mod to serial port of my comp
   welc = new Welcome();
   welc.setupWelcome();
   corr = new correctAnswer();
@@ -19,9 +20,19 @@ void setup() {
 void draw() {
   background(#ffffff);
   if(myPort.available() > 0) { //changed from while to if, in order to print troubleshooting statement; draw is a loop anyways
+    /*
     String inByte = myPort.readStringUntil('&');
-    println(inByte);
+    println(inByte);//prints null; works fine if I comment out the line below
     getInputOfSerial(inByte);
+    */
+    //No null input when I do it this way
+    myPort.readBytesUntil('&', inBuffer);
+    if(inBuffer != null){
+      String inByte = new String(inBuffer); //"b150.0b\ny156.0y";
+      println(inByte);
+      getInputOfSerial(inByte);
+      
+    }
     
   }
   else println("nothing available");//troubleshooting
@@ -36,28 +47,32 @@ void mouseClicked() {
 }
 
 void getInputOfSerial(String inByte) {
-  int tempYellow = inByte.indexOf("y");
-  int tempEndYellow = inByte.indexOf("y", tempYellow);
+  int tempYellow = inByte.indexOf("y"); //(Thinkpad) NullPointerException
+  int tempEndYellow = inByte.indexOf("y", tempYellow+1); //mod: start at 1 past tempYellow so search doesn't stop immediately
   //--troubleshooting--
   println("yellow starts at " + tempYellow + " and ends at " + tempEndYellow);
-  //inputs.set("yellow button", inByte.substring(tempYellow + 1, tempEndYellow - 1)); //StringIndexOutOfBoundsException: tempYellow is index 0, tempEndYellow is index 0!
+  //println("I think yellow is " + inByte.substring(tempYellow + 1, tempEndYellow - 1));
+  //println("I think yellow is " + inByte.substring(tempYellow + 1, tempEndYellow - 1));
+  //inputs.set("yellow button", inByte.substring(tempYellow + 1, tempEndYellow - 1)); //(Mac) StringIndexOutOfBoundsException: tempYellow is index 0, tempEndYellow is index 0!
+  /*
   int tempBlue = inByte.indexOf("b");
-  int tempEndBlue = inByte.indexOf("b", tempBlue);
+  int tempEndBlue = inByte.indexOf("b", tempBlue+1);
   println("blue starts at " + tempBlue + " and ends at " + tempEndBlue); //troubleshooting
   //inputs.set("blue button", inByte.substring(tempBlue + 1, tempEndBlue - 1)); //Blue starts and ends at same index, and so on for the rest of the inputs
   int tempRed = inByte.indexOf("r");
-  int tempEndRed = inByte.indexOf("r", tempRed);
+  int tempEndRed = inByte.indexOf("r", tempRed+1);
   println("red starts at " + tempRed + " and ends at " + tempEndRed); //troubleshooting
   inputs.set("red button", inByte.substring(tempRed + 1, tempEndRed - 1));
   int tempGreen = inByte.indexOf("g");
-  int tempEndGreen = inByte.indexOf("g", tempGreen);
+  int tempEndGreen = inByte.indexOf("g", tempGreen+1);
   inputs.set("green button", inByte.substring(tempGreen + 1, tempEndGreen - 1));
   int tempPhoto = inByte.indexOf("a");
-  int tempEndPhoto = inByte.indexOf("a", tempPhoto);
+  int tempEndPhoto = inByte.indexOf("a", tempPhoto+1);
   inputs.set("photoresistor", inByte.substring(tempPhoto + 1, tempEndPhoto - 1));
   int tempPotent = inByte.indexOf("z");
-  int tempEndPotent = inByte.indexOf("z", tempPotent);
+  int tempEndPotent = inByte.indexOf("z", tempPotent+1);
   inputs.set("potentiometer", inByte.substring(tempPotent + 1, tempEndPotent - 1));
+  */
 }
 
 public void changeScene(String newScene) {
