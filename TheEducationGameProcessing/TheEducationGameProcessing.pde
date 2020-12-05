@@ -5,11 +5,17 @@ Welcome welc;
 correctAnswer corr;
 public StringDict inputs;
 byte[] inBuffer = new byte[255];
+int port = 1;
 
 void setup() {
   size(800, 600);
   printArray(Serial.list());
-  myPort = new Serial(this, Serial.list()[1], 9600); //mod to serial port of my comp
+  if (System.getProperty("os.name").contains("Windows")) {
+    port = 1;
+  } else {
+    port = 3;
+  }
+  myPort = new Serial(this, Serial.list()[port], 9600); //mod to serial port of my comp
   welc = new Welcome();
   welc.setupWelcome();
   corr = new correctAnswer();
