@@ -8,8 +8,8 @@ class FineMotor {
   
   void drawMe() {
     try {
+      print(inputs.get("potentiometer"));
       currentHeight = float(inputs.get("potentiometer"));
-      print(currentHeight);
     } catch(Exception e) {
       currentHeight = 250;
     }

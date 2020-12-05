@@ -92,17 +92,21 @@ void getInputOfSerial(String inByte) {
     inputs.set("red button", inByte.substring(tempRed + 1, tempEndRed));
   }
   
-  /*
   int tempGreen = inByte.indexOf("g");
   int tempEndGreen = inByte.indexOf("g", tempGreen+1);
-  inputs.set("green button", inByte.substring(tempGreen + 1, tempEndGreen - 1));
+  if (tempGreen != -1) {
+    inputs.set("green button", inByte.substring(tempGreen + 1, tempEndGreen - 1));
+  }
   int tempPhoto = inByte.indexOf("a");
   int tempEndPhoto = inByte.indexOf("a", tempPhoto+1);
-  inputs.set("photoresistor", inByte.substring(tempPhoto + 1, tempEndPhoto - 1));
+  if (tempPhoto != -1) {
+    inputs.set("photoresistor", inByte.substring(tempPhoto + 1, tempEndPhoto - 1));
+  }
   int tempPotent = inByte.indexOf("z");
   int tempEndPotent = inByte.indexOf("z", tempPotent+1);
-  inputs.set("potentiometer", inByte.substring(tempPotent + 1, tempEndPotent - 1));
-  */
+  if (tempPotent != -1) {
+    inputs.set("potentiometer", inByte.substring(tempPotent + 1, tempEndPotent - 1));
+  }
 }
 
 public void changeScene(String newScene) {
