@@ -71,7 +71,6 @@ class Welcome {
       currentScene = "emote";
       return 2;
     } else if (int(inputs.get("red button")) == 1) {
-      
       currentScene = "fine";
       return 3;
     } else {

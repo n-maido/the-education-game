@@ -89,7 +89,7 @@ void getInputOfSerial(String inByte) {
   int tempEndRed = inByte.indexOf("r", tempRed+1);
   //println("red starts at " + tempRed + " and ends at " + tempEndRed); //troubleshooting
   if (tempRed != -1) {
-    inputs.set("red button", inByte.substring(tempRed + 1, tempEndRed - 1));
+    inputs.set("red button", inByte.substring(tempRed + 1, tempEndRed));
   }
   
   /*
