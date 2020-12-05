@@ -60,6 +60,7 @@ class Welcome {
   }
   
   int checkInput() {
+    print("yellow: " + int(inputs.get("yellow button")));
     if (int(inputs.get("yellow button")) == 1) {
       
       changeScene("math");
