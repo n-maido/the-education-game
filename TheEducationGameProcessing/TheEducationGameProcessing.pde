@@ -9,7 +9,7 @@ byte[] inBuffer = new byte[255];
 void setup() {
   size(800, 600);
   printArray(Serial.list());
-  myPort = new Serial(this, Serial.list()[3], 9600); //mod to serial port of my comp
+  myPort = new Serial(this, Serial.list()[1], 9600); //mod to serial port of my comp
   welc = new Welcome();
   welc.setupWelcome();
   corr = new correctAnswer();
@@ -52,7 +52,7 @@ void getInputOfSerial(String inByte) {
   //--troubleshooting--
   //println("yellow starts at " + tempYellow + " and ends at " + tempEndYellow);
   if (tempYellow != -1) {
-    println(inByte.substring(tempYellow + 1, tempEndYellow));
+    //println(inByte.substring(tempYellow + 1, tempEndYellow));
     inputs.set("yellow button", inByte.substring(tempYellow +1, tempEndYellow));
   }
   
@@ -64,14 +64,18 @@ void getInputOfSerial(String inByte) {
   int tempEndBlue = inByte.indexOf("b", tempBlue+1);
   if (tempBlue != -1) {
     //println("blue starts at " + tempBlue + " and ends at " + tempEndBlue); //troubleshooting
-    println(inByte.substring(tempBlue+1, tempEndBlue));
+    //println(inByte.substring(tempBlue+1, tempEndBlue));
     inputs.set("blue button", inByte.substring(tempBlue + 1, tempEndBlue)); //Blue starts and ends at same index, and so on for the rest of the inputs
   }
-  /*
+  
   int tempRed = inByte.indexOf("r");
   int tempEndRed = inByte.indexOf("r", tempRed+1);
-  println("red starts at " + tempRed + " and ends at " + tempEndRed); //troubleshooting
-  inputs.set("red button", inByte.substring(tempRed + 1, tempEndRed - 1));
+  //println("red starts at " + tempRed + " and ends at " + tempEndRed); //troubleshooting
+  if (tempRed != -1) {
+    inputs.set("red button", inByte.substring(tempRed + 1, tempEndRed - 1));
+  }
+  
+  /*
   int tempGreen = inByte.indexOf("g");
   int tempEndGreen = inByte.indexOf("g", tempGreen+1);
   inputs.set("green button", inByte.substring(tempGreen + 1, tempEndGreen - 1));

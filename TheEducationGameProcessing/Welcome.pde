@@ -60,6 +60,20 @@ class Welcome {
   }
   
   int checkInput() {
+    if (int(inputs.get("yellow button")) == 1) {
+      
+      changeScene("math");
+      previousFC = frameCount;
+      return 1;
+    } else if (int(inputs.get("blue button")) == 1) {
+      
+      currentScene = "emote";
+      return 2;
+    } else if (int(inputs.get("red button")) == 1) {
+      
+      currentScene = "fine";
+      return 3;
+    }
     if (mouseX <= 200 && mouseX >= 100 && mouseY <= 350 && mouseY >= 300) {
       changeScene("math");
       previousFC = frameCount;
