@@ -41,6 +41,14 @@ class Emotion {
   }
   
   void checkInput() {
+    if (int(inputs.get("yellow button")) == 1) {
+      answerChosen = emotionChoices.get(currentPhoto).get(0);
+    } else if (int(inputs.get("blue button")) == 1) {
+      answerChosen = emotionChoices.get(currentPhoto).get(1);
+    } else if (int(inputs.get("red button")) == 1) {
+      answerChosen = emotionChoices.get(currentPhoto).get(2);
+    } 
+    /*
     if (mouseX <= 200 && mouseX >= 100 && mouseY <= 350 && mouseY >= 300) {
       answerChosen = emotionChoices.get(currentPhoto).get(0);
     } else if (mouseX <= 450 && mouseX >= 350 && mouseY <= 350 && mouseY >= 300) {
@@ -48,7 +56,7 @@ class Emotion {
     } else if (mouseX <= 700 && mouseX >= 600 && mouseY <= 350 && mouseY >= 300) {
       answerChosen = emotionChoices.get(currentPhoto).get(2);
       
-    }
+    }*/
     if (answerChosen != "") {
       if(answerChosen == emotions.get(currentPhoto)) {
         changeScene("corr");
