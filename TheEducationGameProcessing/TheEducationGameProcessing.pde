@@ -29,7 +29,7 @@ void draw() {
     myPort.readBytesUntil('&', inBuffer);
     if(inBuffer != null){
       String inByte = new String(inBuffer); //"b150.0b\ny156.0y";
-      println(inByte);
+      //println(inByte);
       getInputOfSerial(inByte);
       
     }
@@ -50,15 +50,24 @@ void getInputOfSerial(String inByte) {
   int tempYellow = inByte.indexOf("y"); //(Thinkpad) NullPointerException
   int tempEndYellow = inByte.indexOf("y", tempYellow+1); //mod: start at 1 past tempYellow so search doesn't stop immediately
   //--troubleshooting--
-  println("yellow starts at " + tempYellow + " and ends at " + tempEndYellow);
+  //println("yellow starts at " + tempYellow + " and ends at " + tempEndYellow);
+  if (tempYellow != -1) {
+    println(inByte.substring(tempYellow + 1, tempEndYellow));
+    inputs.set("yellow button", inByte.substring(tempYellow +1, tempEndYellow));
+  }
+  
   //println("I think yellow is " + inByte.substring(tempYellow + 1, tempEndYellow - 1));
   //println("I think yellow is " + inByte.substring(tempYellow + 1, tempEndYellow - 1));
   //inputs.set("yellow button", inByte.substring(tempYellow + 1, tempEndYellow - 1)); //(Mac) StringIndexOutOfBoundsException: tempYellow is index 0, tempEndYellow is index 0!
-  /*
+  
   int tempBlue = inByte.indexOf("b");
   int tempEndBlue = inByte.indexOf("b", tempBlue+1);
-  println("blue starts at " + tempBlue + " and ends at " + tempEndBlue); //troubleshooting
-  //inputs.set("blue button", inByte.substring(tempBlue + 1, tempEndBlue - 1)); //Blue starts and ends at same index, and so on for the rest of the inputs
+  if (tempBlue != -1) {
+    //println("blue starts at " + tempBlue + " and ends at " + tempEndBlue); //troubleshooting
+    println(inByte.substring(tempBlue+1, tempEndBlue));
+    inputs.set("blue button", inByte.substring(tempBlue + 1, tempEndBlue)); //Blue starts and ends at same index, and so on for the rest of the inputs
+  }
+  /*
   int tempRed = inByte.indexOf("r");
   int tempEndRed = inByte.indexOf("r", tempRed+1);
   println("red starts at " + tempRed + " and ends at " + tempEndRed); //troubleshooting
