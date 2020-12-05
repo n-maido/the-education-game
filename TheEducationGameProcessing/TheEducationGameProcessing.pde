@@ -9,7 +9,7 @@ byte[] inBuffer = new byte[255];
 void setup() {
   size(800, 600);
   printArray(Serial.list());
-  myPort = new Serial(this, Serial.list()[1], 9600); //mod to serial port of my comp
+  myPort = new Serial(this, Serial.list()[3], 9600); //mod to serial port of my comp
   welc = new Welcome();
   welc.setupWelcome();
   corr = new correctAnswer();
@@ -29,7 +29,7 @@ void draw() {
     myPort.readBytesUntil('&', inBuffer);
     if(inBuffer != null){
       String inByte = new String(inBuffer); //"b150.0b\ny156.0y";
-      //println(inByte);
+      println(inByte);
       getInputOfSerial(inByte);
       
     }

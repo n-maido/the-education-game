@@ -108,7 +108,7 @@ void packageInputs(){
   //serialOutput += "y";
   //yellow button (delimited by 'y')
   Serial.print("y"); 
-  Serial.print(photoInput);
+  Serial.print(yellowInput);
   Serial.print("y");
   Serial.println();
 
@@ -117,7 +117,7 @@ void packageInputs(){
   //serialOutput += "b";
   //blue button (delimited by 'b')
   Serial.print("b"); 
-  Serial.print(photoInput);
+  Serial.print(blueInput);
   Serial.print("b");
   Serial.println();
 
@@ -126,7 +126,7 @@ void packageInputs(){
   //serialOutput += "r";
   //red button (delimited by 'r')
   Serial.print("r"); 
-  Serial.print(photoInput);
+  Serial.print(redInput);
   Serial.print("r");
   Serial.println();
 
@@ -135,7 +135,7 @@ void packageInputs(){
   //serialOutput += "g";
   //green button (delimited by 'g')
   Serial.print("g"); 
-  Serial.print(photoInput);
+  Serial.print(greenInput);
   Serial.print("g");
   Serial.println();
 
