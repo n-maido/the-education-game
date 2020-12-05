@@ -37,6 +37,11 @@ void draw() {
   }
   else println("nothing available");//troubleshooting
   welc.drawMe();
+  if (welc.currentScene == "") {
+    welc.checkInput();
+  } else if (welc.currentScene == "emote") {
+    welc.emote.checkInput();
+  }
 }
 void mouseClicked() {
   if (welc.currentScene == "") {
