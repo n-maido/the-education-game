@@ -73,7 +73,10 @@ class Welcome {
       
       currentScene = "fine";
       return 3;
+    } else {
+      return -1;
     }
+    /*
     if (mouseX <= 200 && mouseX >= 100 && mouseY <= 350 && mouseY >= 300) {
       changeScene("math");
       previousFC = frameCount;
@@ -87,7 +90,7 @@ class Welcome {
       
     } else {
       return -1;
-    }
+    }*/
   }
   
   void correctInput() {

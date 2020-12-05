@@ -36,6 +36,11 @@ void draw() {
     
   }
   else println("nothing available");//troubleshooting
+  
+  inputs.set("yellow button", "0");
+  inputs.set("blue button", "0");
+  inputs.set("red button", "0");
+  inputs.set("green button", "0");
   welc.drawMe();
   if (welc.currentScene == "") {
     welc.checkInput();
