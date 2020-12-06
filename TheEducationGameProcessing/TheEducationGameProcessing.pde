@@ -10,6 +10,7 @@ int port = 1;
 void setup() {
   size(800, 600);
   printArray(Serial.list());
+  //check for the current OS and open the appropriate port
   if (System.getProperty("os.name").contains("Windows")) {
     port = 1;
   } else {

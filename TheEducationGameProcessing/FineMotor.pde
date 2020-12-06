@@ -1,12 +1,19 @@
 class FineMotor {
+  //variables for the knob question
   float yellowHeight;
   float currentHeight;
+  
+  //variables for the light sensor question
+  int targetSeconds; //the amount of seconds we will ask the user to touch the sensor for
   FineMotor() {
-    
+    //set up knob question
     yellowHeight = random(500);
+    
+    //set up light sensor question
+    targetSeconds = 5;
   }
   
-  void drawMe() {
+  void drawKnob() {
     try {
       print(inputs.get("potentiometer"));
       currentHeight = map(float(inputs.get("potentiometer")), 92, 1020, 0, 500);
@@ -31,6 +38,15 @@ class FineMotor {
       changeScene("corr");
     }
   }
+  
+  /*
+  void drawCounter(){
+    background(255);
+    textSize(40);
+    text("Put your finger on the sensor for " + targetSeconds + " seconds", width/10, 35);
+  }
+  */
+  
   
   void checkInput() {
   }

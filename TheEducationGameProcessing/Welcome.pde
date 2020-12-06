@@ -35,7 +35,8 @@ class Welcome {
       } else if (currentScene == "math") {
         math.drawMe();
       } else if (currentScene == "fine") {
-        fine.drawMe();
+        fine.drawKnob();
+        //fine.drawCounter();
       } else if (currentScene == "emote") {
         emote.drawMe();
       }
