@@ -1,7 +1,8 @@
 class Welcome {
   Arithmetic math;
   Emotion emote;
-  FineMotor fine;
+  FineMotor fineKnob;
+  FineMotor finePhoto;
   correctAnswer corr;
   inCorrectAnswer inCorr;
   public String currentScene;
@@ -12,7 +13,8 @@ class Welcome {
   void setupWelcome() {
     math = new Arithmetic();
     emote = new Emotion();
-    fine = new FineMotor();
+    fineKnob = new FineMotor();
+    finePhoto = new FineMotor();
     corr = new correctAnswer();
     inCorr = new inCorrectAnswer();
     currentScene = "";
@@ -35,8 +37,8 @@ class Welcome {
       } else if (currentScene == "math") {
         math.drawMe();
       } else if (currentScene == "fine") {
-        fine.drawKnob();
-        //fine.drawCounter();
+        fineKnob.drawKnob();
+        finePhoto.drawCounter();
       } else if (currentScene == "emote") {
         emote.drawMe();
       }
