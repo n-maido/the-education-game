@@ -6,13 +6,18 @@ correctAnswer corr;
 public StringDict inputs;
 byte[] inBuffer = new byte[255];
 int port = 1;
+int numQuestions = 3;
+int questionsCompleted;
+public ArrayList<Boolean> questions;
+AnswerRecap recap;
 
 void setup() {
   size(800, 600);
   printArray(Serial.list());
   //check for the current OS and open the appropriate port
   if (System.getProperty("os.name").contains("Windows")) {
-    port = 1;
+    //port = 1;
+    port = 0;
   } else {
     port = 3;
   }
@@ -26,6 +31,11 @@ void setup() {
   inputs.set("blue button", "0");
   inputs.set("red button", "0");
   inputs.set("green button", "0");
+  questions = new ArrayList<Boolean>();
+  questions.add(true);
+  questions.add(false);
+  questions.add(true);
+  recap = new AnswerRecap();
 }
 
 void draw() {
@@ -40,15 +50,15 @@ void draw() {
     myPort.readBytesUntil('&', inBuffer);
     if(inBuffer != null){
       String inByte = new String(inBuffer); //"b150.0b\ny156.0y";
-      println(inByte);
+      //println(inByte);
       getInputOfSerial(inByte);
       
     }
     
   }
-  else println("nothing available");//troubleshooting
+  //else println("nothing available");//troubleshooting
   
-  
+  //recap.drawMe();
   welc.drawMe();
   if (welc.currentScene == "") {
     welc.checkInput();
@@ -58,9 +68,9 @@ void draw() {
 }
 void mouseClicked() {
   if (welc.currentScene == "") {
-    welc.checkInput();
+    welc.checkMouseInput();
   } else if (welc.currentScene == "emote") {
-    welc.emote.checkInput();
+    //welc.emote.checkInput();
   }
 }
 
@@ -113,6 +123,36 @@ void getInputOfSerial(String inByte) {
 public void changeScene(String newScene) {
   welc.currentScene = newScene;
   welc.previousFC = frameCount;
+}
+
+public void questionCompleted(boolean correct, String scene) {
+  questionsCompleted++;
+  if (correct == true) {
+    questions.add(true);
+    welc.previousScene = scene;
+    changeScene("corr");
+  } else if (correct == false) {
+    questions.add(false);
+    welc.previousScene = scene;
+    changeScene("inCorr");
+  }
+  if (questionsCompleted == numQuestions && scene != "fineKnob" && scene != "finePhoto") {
+    recap.resetQuestions();
+    welc.previousFC = frameCount;
+    welc.currentScene = "recap";
+    //print("Section Completed");
+    //questions.clear();
+  } else if (questionsCompleted == numQuestions && scene == "fineKnob") {
+    welc.timeForPhoto = true;
+    recap.resetQuestions();
+    welc.previousFC = frameCount;
+    welc.currentScene = "recap";
+  } else if (questionsCompleted == numQuestions && scene == "finePhoto") {
+    welc.timeForPhoto = false;
+    recap.resetQuestions();
+    welc.previousFC = frameCount;
+    welc.currentScene = "recap";
+  }
 }
 
 void keyPressed() {

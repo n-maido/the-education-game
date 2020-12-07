@@ -31,8 +31,10 @@ class FineMotor{
     textSize(40);
     text("Twist the knob until they match", width/10, 35);
     if (currentHeight >= yellowHeight-10 && currentHeight <= yellowHeight+10) {
-      changeScene("corr"); //skips over this
-      changeScene("finePhoto");
+      questionCompleted(true, "fineKnob");
+      
+      //changeScene("corr"); //skips over this
+      //changeScene("finePhoto");
     }
   }
     

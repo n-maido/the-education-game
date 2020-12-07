@@ -59,9 +59,11 @@ class Emotion {
     }*/
     if (answerChosen != "") {
       if(answerChosen == emotions.get(currentPhoto)) {
-        changeScene("corr");
+        questionCompleted(true, "emote");
+        //changeScene("corr");
       } else {
-        changeScene("inCorr");
+        questionCompleted(false, "emote");
+        //changeScene("inCorr");
       }
     }
   }

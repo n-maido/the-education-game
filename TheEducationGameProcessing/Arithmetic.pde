@@ -35,9 +35,13 @@ class Arithmetic {
   void checkAnswer() {
     try {
       if (int(answer) == answers.get(questionLoc)) {
-        changeScene("corr");
+        //changeScene("corr");
+        questionCompleted(true, "math");
+        answer = "";
       } else {
-        changeScene("inCorr");
+        questionCompleted(false, "math");
+        answer = "";
+        //changeScene("inCorr");
       }
     } catch(Exception e) {
     }

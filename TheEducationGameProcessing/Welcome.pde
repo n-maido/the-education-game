@@ -6,7 +6,8 @@ class Welcome {
   correctAnswer corr;
   inCorrectAnswer inCorr;
   public String currentScene;
-  
+  public String previousScene;
+  boolean timeForPhoto;
   int currentFC = 0;
   int previousFC;
   
@@ -26,13 +27,23 @@ class Welcome {
          corr.drawMe();
          currentFC = frameCount;
          if ((currentFC - previousFC) / 60 == 5) {
-           currentScene = "";
+           currentScene = previousScene;
          }
       } else if (currentScene == "inCorr") {
         inCorr.drawMe();
         currentFC = frameCount;
         if ((currentFC - previousFC) / 60 == 5) {
-          currentScene = "";
+          currentScene = previousScene;
+        }
+      } else if (currentScene == "recap") {
+        recap.drawMe();
+        currentFC = frameCount;
+        if ((currentFC - previousFC) / 60 == 5) {
+          if (timeForPhoto == true) {
+            currentScene = "finePhoto";
+          } else {
+            currentScene = "";
+          }
         }
       } else if (currentScene == "math") {
         math.drawMe();
@@ -65,7 +76,7 @@ class Welcome {
   }
   
   int checkInput() {
-    print("yellow: " + int(inputs.get("yellow button")));
+    //print("yellow: " + int(inputs.get("yellow button")));
     if (int(inputs.get("yellow button")) == 1) {
       
       changeScene("math");
@@ -81,7 +92,10 @@ class Welcome {
     } else {
       return -1;
     }
-    /*
+    
+    
+  }
+  int checkMouseInput() {
     if (mouseX <= 200 && mouseX >= 100 && mouseY <= 350 && mouseY >= 300) {
       changeScene("math");
       previousFC = frameCount;
@@ -95,7 +109,7 @@ class Welcome {
       
     } else {
       return -1;
-    }*/
+    }
   }
   
   void correctInput() {
