@@ -2,7 +2,7 @@ class Welcome {
   Arithmetic math;
   Emotion emote;
   FineMotor fineKnob;
-  FineMotor finePhoto;
+  FineMotorPhoto finePhoto;
   correctAnswer corr;
   inCorrectAnswer inCorr;
   public String currentScene;
@@ -14,7 +14,7 @@ class Welcome {
     math = new Arithmetic();
     emote = new Emotion();
     fineKnob = new FineMotor();
-    finePhoto = new FineMotor();
+    finePhoto = new FineMotorPhoto();
     corr = new correctAnswer();
     inCorr = new inCorrectAnswer();
     currentScene = "";
@@ -36,10 +36,12 @@ class Welcome {
         }
       } else if (currentScene == "math") {
         math.drawMe();
-      } else if (currentScene == "fine") {
+      } else if (currentScene == "fineKnob") {
         fineKnob.drawKnob();
+      } else if (currentScene == "finePhoto"){
         finePhoto.drawCounter();
-      } else if (currentScene == "emote") {
+      }
+      else if (currentScene == "emote") {
         emote.drawMe();
       }
     } else{
@@ -74,7 +76,7 @@ class Welcome {
       currentScene = "emote";
       return 2;
     } else if (int(inputs.get("red button")) == 1) {
-      currentScene = "fine";
+      currentScene = "fineKnob";
       return 3;
     } else {
       return -1;

@@ -1,17 +1,12 @@
-class FineMotor {
+class FineMotor{
   //variables for the knob question
   float yellowHeight;
   float currentHeight;
   
-  //variables for the light sensor question
-  int targetSeconds; //the amount of seconds we will ask the user to touch the sensor for
-  float lightSensorValue;
   FineMotor() {
     //set up knob question
     yellowHeight = random(500);
     
-    //set up light sensor question
-    targetSeconds = 5;
   }
   
   void drawKnob() {
@@ -36,33 +31,11 @@ class FineMotor {
     textSize(40);
     text("Twist the knob until they match", width/10, 35);
     if (currentHeight >= yellowHeight-10 && currentHeight <= yellowHeight+10) {
-      changeScene("corr");
+      changeScene("corr"); //skips over this
+      changeScene("finePhoto");
     }
   }
-  
-  
-  void drawCounter(){
-    //display the prompt
-    background(255);
-    textSize(40);
-    text("Put your finger on the sensor for " + targetSeconds + " seconds", width/10, 35);
     
-    //get the light sensor reading
-    lightSensorValue = float(inputs.get("photoresistor"));
-    println("Photoresistor: " + lightSensorValue);
-    
-    //check if finger is placed on the sensor
-    if(lightSensorValue < 80){
-      //when finger is placed on sensor, start the counter
-      background(255);
-      text("1", width/10, 35);
-      
-    }
-    
-  }
-  
-  
-  
   void checkInput() {
   }
 }
