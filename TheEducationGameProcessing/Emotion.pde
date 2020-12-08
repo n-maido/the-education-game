@@ -52,6 +52,7 @@ class Emotion {
     }
     
     //display the chosen emotion
+    println("question: " + question);
     switch(question){
       case 1:
         addHappyFeatures();
@@ -64,7 +65,7 @@ class Emotion {
   
   int setupPhotos() {
     keepGenerating = false;
-    return int(rand(1, 3));
+    return int(random(1, 3));
   }
   
   void setupEmotions() {
