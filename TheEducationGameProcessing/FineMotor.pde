@@ -30,8 +30,10 @@ class FineMotor{
     fill(0);
     textSize(40);
     text("Twist the knob until they match", width/10, 35);
+    //Giving the user a bit of a buffer to get right.
     if (currentHeight >= yellowHeight-10 && currentHeight <= yellowHeight+10) {
       questionCompleted(true, "fineKnob");
+      //Setting up a new question
       newQ();
     }
   }

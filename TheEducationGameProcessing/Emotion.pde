@@ -32,7 +32,9 @@ class Emotion {
   }
   
   void setupEmotions() {
+    //Adding the right emotion
     emotions.add("happy");
+    //Adding a multiple choice of emotions that will appear on screen
     ArrayList<String> temp = new ArrayList<String>();
     temp.add("happy");
     temp.add("sad");
@@ -41,6 +43,7 @@ class Emotion {
   }
   
   void checkInput() {
+    //Checks if the button pressed is the right one and then does the normal if right, then true. if wrong, then false stuff
     if (int(inputs.get("yellow button")) == 1) {
       answerChosen = emotionChoices.get(currentPhoto).get(0);
     } else if (int(inputs.get("blue button")) == 1) {
