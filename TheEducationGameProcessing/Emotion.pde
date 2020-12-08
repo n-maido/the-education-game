@@ -52,20 +52,25 @@ class Emotion {
     }
     
     //display the chosen emotion
-    println("question: " + question);
+    //println("question: " + question);
     switch(question){
       case 1:
         addHappyFeatures();
+        break;
       case 2:
         addSadFeatures();
+        break;
       case 3:
         addAngryFeatures();
+        break;
     }
   }
   
   int setupPhotos() {
     keepGenerating = false;
-    return int(random(1, 3));
+    question = int(random(1,3));
+    println(question);
+    return question;
   }
   
   void setupEmotions() {
