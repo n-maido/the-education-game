@@ -18,6 +18,11 @@ class Arithmetic {
     text(currentQuestion + answer, width/3, height/2);
   }
   
+  void chooseNewQuestion() {
+    currentQuestion = selectQuestion();
+    questionLoc = questions.indexOf(currentQuestion);
+  }
+  
   int checkInput() {
     return -1;
   }
@@ -43,6 +48,7 @@ class Arithmetic {
         answer = "";
         //changeScene("inCorr");
       }
+      chooseNewQuestion();
     } catch(Exception e) {
     }
   }
