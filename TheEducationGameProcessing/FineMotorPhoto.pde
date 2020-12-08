@@ -25,8 +25,6 @@ class FineMotorPhoto{
     lightSensorValue = float(inputs.get("photoresistor"));
     println("Photoresistor: " + lightSensorValue);
     
-    //timeElapsedFinger = 0;
-    
     //check if finger is placed on the sensor
     if(lightSensorValue < 80){
       if (countingStarted == false) {
