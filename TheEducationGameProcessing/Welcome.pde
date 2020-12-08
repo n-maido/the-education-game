@@ -103,6 +103,8 @@ class Welcome {
     } else if (int(inputs.get("red button")) == 1) {
       currentScene = "fineKnob";
       return 3;
+    } else if (int(inputs.get("green button")) == 1) {
+      exit();
     } else {
       return -1;
     }
