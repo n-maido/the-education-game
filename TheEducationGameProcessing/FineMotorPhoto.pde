@@ -12,7 +12,6 @@ class FineMotorPhoto{
   FineMotorPhoto(){
     //set up light sensor question
     targetSeconds = int(random(2, 6));
-    //targetSeconds = 5;
   }
   
   void drawCounter(){
@@ -45,10 +44,11 @@ class FineMotorPhoto{
       textSize(150);
       text(timeElapsedFinger, width/2, height/2);
       if (timeElapsedFinger > targetSeconds) {
+        println("photo q finished");
         questionCompleted(true, "finePhoto");
         countingStarted = false;
         timeStarted = 0;
-        timeElapsedProgram = 0;
+        //timeElapsedProgram = 0;
         timeElapsedFinger = 0;
       }
     } else {

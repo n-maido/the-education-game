@@ -127,6 +127,7 @@ public void changeScene(String newScene) {
 
 public void questionCompleted(boolean correct, String scene) {
   questionsCompleted++;
+  println("questions completed: " + questionsCompleted);
   if (correct == true) {
     questions.add(true);
     welc.previousScene = scene;
@@ -137,6 +138,7 @@ public void questionCompleted(boolean correct, String scene) {
     changeScene("inCorr");
   }
   if (questionsCompleted == numQuestions && scene != "fineKnob" && scene != "finePhoto") {
+    println("knob and photo completed");
     recap.resetQuestions();
     welc.previousFC = frameCount;
     welc.currentScene = "recap";
@@ -147,7 +149,8 @@ public void questionCompleted(boolean correct, String scene) {
     recap.resetQuestions();
     welc.previousFC = frameCount;
     welc.currentScene = "recap";
-  } else if (questionsCompleted == numQuestions && scene == "finePhoto") {
+  } else if (questionsCompleted % numQuestions == 0 && scene == "finePhoto") {
+    println("photo completed");
     welc.timeForPhoto = false;
     recap.resetQuestions();
     welc.previousFC = frameCount;
