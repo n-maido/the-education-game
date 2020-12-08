@@ -105,9 +105,8 @@ class Welcome {
       return 3;
     } else if (int(inputs.get("green button")) == 1) {
       exit();
-    } else {
-      return -1;
     }
+    return -1;
     
     
   }
