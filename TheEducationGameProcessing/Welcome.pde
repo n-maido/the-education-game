@@ -66,6 +66,7 @@ class Welcome {
       }
       //Emotion Section
       else if (currentScene == "emote") {
+        previousFC = frameCount;
         emote.drawMe();
       }
     } else{

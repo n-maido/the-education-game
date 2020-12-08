@@ -88,6 +88,7 @@ class Emotion {
   }
   
   void checkInput() {
+    
     //Checks if the button pressed is the right one and then does the normal if right, then true. if wrong, then false stuff
     if (int(inputs.get("yellow button")) == 1) {
       answerChosen = emotionChoices.get(currentPhoto).get(0);

@@ -60,7 +60,10 @@ void draw() {
   if (welc.currentScene == "") {
     welc.checkInput();
   } else if (welc.currentScene == "emote") {
-    welc.emote.checkInput();
+    welc.currentFC = frameCount;
+    if ((welc.currentFC - welc.previousFC) / 60 == 5) {
+        welc.emote.checkInput();
+    }
   }
 }
 void mouseClicked() {
