@@ -1,6 +1,6 @@
 class Emotion {
   ArrayList<PImage> photos = new ArrayList<PImage>();
-  ArrayList<String> emotions = new ArrayList<String>();
+  String correctEmotion;
   ArrayList<ArrayList<String>> emotionChoices = new ArrayList<ArrayList<String>>();
   int currentPhoto = 0;
   String answerChosen = "";
@@ -56,12 +56,15 @@ class Emotion {
     switch(question){
       case 1:
         addHappyFeatures();
+        correctEmotion = "happy";
         break;
       case 2:
         addSadFeatures();
+        correctEmotion = "sad";
         break;
       case 3:
         addAngryFeatures();
+        correctEmotion = "angry";
         break;
     }
   }
@@ -75,7 +78,7 @@ class Emotion {
   
   void setupEmotions() {
     //Adding the right emotion
-    emotions.add("happy");
+    //emotions.add("happy");
     //Adding a multiple choice of emotions that will appear on screen
     ArrayList<String> temp = new ArrayList<String>();
     temp.add("happy");
@@ -93,16 +96,15 @@ class Emotion {
     } else if (int(inputs.get("red button")) == 1) {
       answerChosen = emotionChoices.get(currentPhoto).get(2);
     }
-    /*
+    
     if (answerChosen != "") {
-      if(answerChosen == emotions.get(currentPhoto)) {        
+      if(answerChosen == correctEmotion) {        
         questionCompleted(true, "emote");
         keepGenerating = true;
       } else {
         questionCompleted(false, "emote");
       }
     }
-    */
   }
   
   void drawBlankFace(){
