@@ -138,18 +138,21 @@ public void questionCompleted(boolean correct, String scene) {
     recap.resetQuestions();
     welc.previousFC = frameCount;
     welc.currentScene = "recap";
+    questionsCompleted = 0;
   } else if (questionsCompleted == numQuestions && scene == "fineKnob") {
     //If you're on either the potentiometer or the photoresistor. Things change. with the potentiometer, you need to go the photoresistor afterwards, so we tracked that using a variable named "time for photo" after that you need to reset it.
     welc.timeForPhoto = true;
     recap.resetQuestions();
     welc.previousFC = frameCount;
     welc.currentScene = "recap";
+    questionsCompleted = 0;
   } else if (questionsCompleted % numQuestions == 0 && scene == "finePhoto") {
     println("photo completed");
     welc.timeForPhoto = false;
     recap.resetQuestions();
     welc.previousFC = frameCount;
     welc.currentScene = "recap";
+    questionsCompleted = 0;
   }
 }
 
