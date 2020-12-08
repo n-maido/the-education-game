@@ -99,6 +99,7 @@ class Emotion {
     }
     
     if (answerChosen != "") {
+      welc.previousFC = frameCount;
       if(answerChosen == correctEmotion) {        
         questionCompleted(true, "emote");
         keepGenerating = true;
