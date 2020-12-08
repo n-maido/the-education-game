@@ -22,37 +22,49 @@ class Welcome {
   }
   
   void drawMe() {
+    //Current Scene is the way we track which scene we're on.
     if (currentScene != "") {
+      //Corr is correct Answer
       if (currentScene == "corr") {
          corr.drawMe();
          currentFC = frameCount;
+         //Checks if it has been 5 seconds and then resets.
          if ((currentFC - previousFC) / 60 == 5) {
            currentScene = previousScene;
          }
+         //InCorr is incorrect
       } else if (currentScene == "inCorr") {
         inCorr.drawMe();
         currentFC = frameCount;
+        //Same 5 seconds
         if ((currentFC - previousFC) / 60 == 5) {
           currentScene = previousScene;
         }
+        //Recap is the recap after each scene
       } else if (currentScene == "recap") {
         recap.drawMe();
         currentFC = frameCount;
+        //Same 5 seconds except for the fine photo and stuff
         if ((currentFC - previousFC) / 60 == 5) {
           if (timeForPhoto == true) {
             currentScene = "finePhoto";
           } else {
+            //If we end up here, we just draw the welcome screen
             currentScene = "";
           }
         }
+        //Math section
       } else if (currentScene == "math") {
         math.drawMe();
+        //Potentiometer section
       } else if (currentScene == "fineKnob") {
         fineKnob.drawKnob();
         //finePhoto.drawCounter();
+        //Photoresistor section
       } else if (currentScene == "finePhoto"){
         finePhoto.drawCounter();
       }
+      //Emotion Section
       else if (currentScene == "emote") {
         emote.drawMe();
       }
@@ -77,7 +89,7 @@ class Welcome {
   }
   
   int checkInput() {
-    //print("yellow: " + int(inputs.get("yellow button")));
+    //Checking input for the welcome screen
     if (int(inputs.get("yellow button")) == 1) {
       
       changeScene("math");
