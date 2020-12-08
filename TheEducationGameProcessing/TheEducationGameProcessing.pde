@@ -77,37 +77,37 @@ void getInputOfSerial(String inByte) {
   //Yellow button
   int tempYellow = inByte.indexOf("y");
   int tempEndYellow = inByte.indexOf("y", tempYellow+1);
-  if (tempYellow <= -1) {
+  if (tempYellow != -1) {
     inputs.set("yellow button", inByte.substring(tempYellow +1, tempEndYellow));
   }
   //blue button
   int tempBlue = inByte.indexOf("b");
   int tempEndBlue = inByte.indexOf("b", tempBlue+1);
-  if (tempBlue <= -1) {
+  if (tempBlue != -1) {
     inputs.set("blue button", inByte.substring(tempBlue + 1, tempEndBlue)); //Blue starts and ends at same index, and so on for the rest of the inputs
   }
   //red button
   int tempRed = inByte.indexOf("r");
   int tempEndRed = inByte.indexOf("r", tempRed+1);
-  if (tempRed <= -1) {
+  if (tempRed != -1) {
     inputs.set("red button", inByte.substring(tempRed + 1, tempEndRed));
   }
   //green button
   int tempGreen = inByte.indexOf("g");
   int tempEndGreen = inByte.indexOf("g", tempGreen+1);
-  if (tempGreen <= -1) {
+  if (tempGreen != -1) {
     inputs.set("green button", inByte.substring(tempGreen + 1, tempEndGreen));
   }
   //photo resistor
   int tempPhoto = inByte.indexOf("a");
   int tempEndPhoto = inByte.indexOf("a", tempPhoto+1);
-  if (tempPhoto <= -1) {
+  if (tempPhoto != -1) {
     inputs.set("photoresistor", inByte.substring(tempPhoto + 1, tempEndPhoto));
   }
   //potentiometer
   int tempPotent = inByte.indexOf("z");
   int tempEndPotent = inByte.indexOf("z", tempPotent+1);
-  if (tempPotent <= -1) {
+  if (tempPotent != -1) {
     inputs.set("potentiometer", inByte.substring(tempPotent + 1, tempEndPotent));
   }
 }
