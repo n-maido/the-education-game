@@ -61,7 +61,7 @@ void draw() {
     welc.checkInput();
   } else if (welc.currentScene == "emote") {
     welc.currentFC = frameCount;
-    if ((welc.currentFC - welc.previousFC) / 60 == 5) {
+    if ((welc.currentFC - welc.previousFC) / 60 == 1) {
         welc.emote.checkInput();
     }
   }

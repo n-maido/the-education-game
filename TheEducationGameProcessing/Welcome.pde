@@ -66,7 +66,7 @@ class Welcome {
       }
       //Emotion Section
       else if (currentScene == "emote") {
-        previousFC = frameCount;
+        
         emote.drawMe();
       }
     } else{
@@ -97,7 +97,7 @@ class Welcome {
       previousFC = frameCount;
       return 1;
     } else if (int(inputs.get("blue button")) == 1) {
-      
+      previousFC = frameCount;
       currentScene = "emote";
       return 2;
     } else if (int(inputs.get("red button")) == 1) {
