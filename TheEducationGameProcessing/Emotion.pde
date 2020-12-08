@@ -21,7 +21,7 @@ class Emotion {
     setupPhotos();
     setupEmotions();
     textY = height * 3/4;
-    buttonY = textY - 25;
+    buttonY = textY - 30;
   }
   
   void drawMe() {
@@ -29,7 +29,7 @@ class Emotion {
     background(255);
     fill(0, 0, 0);
     fill(255, 255, 0);
-    rect(100, buttonY, 100, 50); //happy button
+    rect(105, buttonY, 100, 50); //happy button
     textSize(25);
     fill(0);
     text(emotionChoices.get(currentPhoto).get(0), 100+20, textY); //option 1: happy
