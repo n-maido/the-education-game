@@ -32,9 +32,13 @@ class FineMotor{
     text("Twist the knob until they match", width/10, 35);
     if (currentHeight >= yellowHeight-10 && currentHeight <= yellowHeight+10) {
       questionCompleted(true, "fineKnob");
+      newQ();
     }
   }
     
+  void newQ() {
+    yellowHeight = random(500);
+  }
   void checkInput() {
   }
 }
