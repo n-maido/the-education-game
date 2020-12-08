@@ -8,6 +8,7 @@ class FineMotorPhoto{
   int timeStarted;
   
   boolean countingStarted = false;
+  boolean keepGenerating = true;
   
   FineMotorPhoto(){
     //set up light sensor question
@@ -15,6 +16,10 @@ class FineMotorPhoto{
   }
   
   void drawCounter(){
+    if(keepGenerating ==true){
+      targetSeconds = newQuestion();
+    }
+  
     //display the prompt
     background(255);
     textAlign(CENTER);
@@ -47,6 +52,7 @@ class FineMotorPhoto{
         println("photo q finished");
         questionCompleted(true, "finePhoto");
         countingStarted = false;
+        keepGenerating = true;
         timeStarted = 0;
         //timeElapsedProgram = 0;
         timeElapsedFinger = 0;
@@ -62,5 +68,10 @@ class FineMotorPhoto{
   void startCounting() {
     countingStarted = true;
     timeStarted = millis()/1000;
+  }
+  
+  int newQuestion(){
+    keepGenerating = false;
+    return int(random(2, 6));
   }
 }
