@@ -11,20 +11,22 @@ class FineMotorPhoto{
   
   FineMotorPhoto(){
     //set up light sensor question
-    targetSeconds = int(random(1, 5));
+    targetSeconds = int(random(2, 6));
     //targetSeconds = 5;
   }
   
   void drawCounter(){
     //display the prompt
     background(255);
-    text("Put your finger on the sensor for " + targetSeconds + " seconds", width/10, 35);  
+    textAlign(CENTER);
+    textSize(35);
+    text("Put your finger on the sensor for " + targetSeconds + " seconds", width/2, height/2);  
    
     //get the light sensor reading
     lightSensorValue = float(inputs.get("photoresistor"));
     println("Photoresistor: " + lightSensorValue);
     
-    timeElapsedFinger = 0;
+    //timeElapsedFinger = 0;
     
     //check if finger is placed on the sensor
     if(lightSensorValue < 80){
@@ -32,16 +34,16 @@ class FineMotorPhoto{
         startCounting();
       }
       //when finger is placed on sensor, start the counter
-      background(255);
-      textAlign(CENTER);
-      //text("1", width/10, 35); 
+      //textAlign(CENTER);
       
-      int timeElapsedProgram = millis()/1000 - timeStarted;      
+      timeElapsedFinger = millis()/1000 - timeStarted;      
       println(timeElapsedProgram);
       
-      timeElapsedFinger = timeElapsedProgram - 1;
+      //timeElapsedFinger = timeElapsedProgram -1;
       println(timeElapsedFinger);
-      text(timeElapsedFinger, width/10, 35);
+      background(255);
+      textSize(150);
+      text(timeElapsedFinger, width/2, height/2);
       if (timeElapsedFinger > targetSeconds) {
         questionCompleted(true, "finePhoto");
         countingStarted = false;
@@ -53,6 +55,8 @@ class FineMotorPhoto{
       countingStarted = false;
     }
     
+    //reset to original screen settings
+    textAlign(LEFT);    
   }
   
   void startCounting() {
