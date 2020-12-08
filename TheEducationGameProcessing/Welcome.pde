@@ -49,6 +49,7 @@ class Welcome {
         math.drawMe();
       } else if (currentScene == "fineKnob") {
         fineKnob.drawKnob();
+        //finePhoto.drawCounter();
       } else if (currentScene == "finePhoto"){
         finePhoto.drawCounter();
       }
@@ -104,7 +105,7 @@ class Welcome {
       currentScene = "emote";
       return 2;
     } else if (mouseX <= 700 && mouseX >= 600 && mouseY <= 350 && mouseY >= 300) {
-      currentScene = "fine";
+      currentScene = "fineKnob";
       return 3;
       
     } else {

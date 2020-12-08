@@ -53,7 +53,11 @@ class Arithmetic {
   
   void setupQuestions() {
     questions.add("4 + 7 = ");
+    questions.add("10 + 11 = ");
     answers.add(11);
+    answers.add(21);
+    questions.add("18 + 12 = ");
+    answers.add(30);
   }
   
   public void mathKeyPressed(char key) {
