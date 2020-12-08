@@ -1,3 +1,0 @@
-facenet_pytorch
-opencv-python>=3.4.2
-numpy>=1.18.1
