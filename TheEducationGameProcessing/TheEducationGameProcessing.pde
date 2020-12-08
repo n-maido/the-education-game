@@ -63,7 +63,7 @@ void draw() {
     welc.currentFC = frameCount;
     print(welc.previousFC);
     println(welc.currentFC);
-    if ((welc.currentFC - welc.previousFC) / 60 >= 1) {
+    if ((welc.currentFC - welc.previousFC) / 60 >= 2) {
         welc.emote.checkInput();
     }
   }
