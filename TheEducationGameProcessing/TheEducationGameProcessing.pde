@@ -22,16 +22,20 @@ void setup() {
     port = 3;
   }
   myPort = new Serial(this, Serial.list()[port], 9600); //mod to serial port of my comp
+  //Creating a welcome scene and setting it up
   welc = new Welcome();
   welc.setupWelcome();
   corr = new correctAnswer();
+  //Setting up the string dictionary to track the button inputs
   inputs = new StringDict();
   frameRate(60);
   inputs.set("yellow button", "0");
   inputs.set("blue button", "0");
   inputs.set("red button", "0");
   inputs.set("green button", "0");
+  //Setting up the arraylist to track the questions
   questions = new ArrayList<Boolean>();
+  //Test questions that get deleted
   questions.add(true);
   questions.add(false);
   questions.add(true);
@@ -40,26 +44,19 @@ void setup() {
 
 void draw() {
   background(#ffffff);
-  if(myPort.available() > 0) { //changed from while to if, in order to print troubleshooting statement; draw is a loop anyways
-    /*
-    String inByte = myPort.readStringUntil('&');
-    println(inByte);//prints null; works fine if I comment out the line below
-    getInputOfSerial(inByte);
-    */
-    //No null input when I do it this way
+  if(myPort.available() > 0) {
+    //Reading the bytes until our break character in the arduino code
     myPort.readBytesUntil('&', inBuffer);
     if(inBuffer != null){
-      String inByte = new String(inBuffer); //"b150.0b\ny156.0y";
-      //println(inByte);
+      String inByte = new String(inBuffer);
       getInputOfSerial(inByte);
       
     }
     
   }
-  //else println("nothing available");//troubleshooting
-  
-  //recap.drawMe();
+  //Drawing the welcome scene
   welc.drawMe();
+  //Checking the input. Two different scenes need different inputs so need two different functions
   if (welc.currentScene == "") {
     welc.checkInput();
   } else if (welc.currentScene == "emote") {
@@ -67,6 +64,7 @@ void draw() {
   }
 }
 void mouseClicked() {
+  //For bug testing on the computer that doesn't have the arduino
   if (welc.currentScene == "") {
     welc.checkMouseInput();
   } else if (welc.currentScene == "emote") {
@@ -75,44 +73,38 @@ void mouseClicked() {
 }
 
 void getInputOfSerial(String inByte) {
-  int tempYellow = inByte.indexOf("y"); //(Thinkpad) NullPointerException
-  int tempEndYellow = inByte.indexOf("y", tempYellow+1); //mod: start at 1 past tempYellow so search doesn't stop immediately
-  //--troubleshooting--
-  //println("yellow starts at " + tempYellow + " and ends at " + tempEndYellow);
+  //Splitting strings based on the index of the splitting variables
+  //Yellow button
+  int tempYellow = inByte.indexOf("y");
+  int tempEndYellow = inByte.indexOf("y", tempYellow+1);
   if (tempYellow != -1) {
-    //println(inByte.substring(tempYellow + 1, tempEndYellow));
     inputs.set("yellow button", inByte.substring(tempYellow +1, tempEndYellow));
   }
-  
-  //println("I think yellow is " + inByte.substring(tempYellow + 1, tempEndYellow - 1));
-  //println("I think yellow is " + inByte.substring(tempYellow + 1, tempEndYellow - 1));
-  //inputs.set("yellow button", inByte.substring(tempYellow + 1, tempEndYellow - 1)); //(Mac) StringIndexOutOfBoundsException: tempYellow is index 0, tempEndYellow is index 0!
-  
+  //blue button
   int tempBlue = inByte.indexOf("b");
   int tempEndBlue = inByte.indexOf("b", tempBlue+1);
   if (tempBlue != -1) {
-    //println("blue starts at " + tempBlue + " and ends at " + tempEndBlue); //troubleshooting
-    //println(inByte.substring(tempBlue+1, tempEndBlue));
     inputs.set("blue button", inByte.substring(tempBlue + 1, tempEndBlue)); //Blue starts and ends at same index, and so on for the rest of the inputs
   }
-  
+  //red button
   int tempRed = inByte.indexOf("r");
   int tempEndRed = inByte.indexOf("r", tempRed+1);
-  //println("red starts at " + tempRed + " and ends at " + tempEndRed); //troubleshooting
   if (tempRed != -1) {
     inputs.set("red button", inByte.substring(tempRed + 1, tempEndRed));
   }
-  
+  //green button
   int tempGreen = inByte.indexOf("g");
   int tempEndGreen = inByte.indexOf("g", tempGreen+1);
   if (tempGreen != -1) {
     inputs.set("green button", inByte.substring(tempGreen + 1, tempEndGreen));
   }
+  //photo resistor
   int tempPhoto = inByte.indexOf("a");
   int tempEndPhoto = inByte.indexOf("a", tempPhoto+1);
   if (tempPhoto != -1) {
     inputs.set("photoresistor", inByte.substring(tempPhoto + 1, tempEndPhoto));
   }
+  //potentiometer
   int tempPotent = inByte.indexOf("z");
   int tempEndPotent = inByte.indexOf("z", tempPotent+1);
   if (tempPotent != -1) {
@@ -121,13 +113,16 @@ void getInputOfSerial(String inByte) {
 }
 
 public void changeScene(String newScene) {
+  //Function to change scene so that it's easier to do
   welc.currentScene = newScene;
   welc.previousFC = frameCount;
 }
 
 public void questionCompleted(boolean correct, String scene) {
+  //Function to track which questions are correct
   questionsCompleted++;
   println("questions completed: " + questionsCompleted);
+  //If it's true, add a true to the arraylist and then set the scene passed to be the previous scene. Otherwise add a false and do the same thing. Corr is the correctAnswer scene, inCorr is incorrect.
   if (correct == true) {
     questions.add(true);
     welc.previousScene = scene;
@@ -137,14 +132,14 @@ public void questionCompleted(boolean correct, String scene) {
     welc.previousScene = scene;
     changeScene("inCorr");
   }
+  //If the number of questions is equal to the set amount of questions you're to do per section then it runs the recap.
   if (questionsCompleted == numQuestions && scene != "fineKnob" && scene != "finePhoto") {
     println("knob and photo completed");
     recap.resetQuestions();
     welc.previousFC = frameCount;
     welc.currentScene = "recap";
-    //print("Section Completed");
-    //questions.clear();
   } else if (questionsCompleted == numQuestions && scene == "fineKnob") {
+    //If you're on either the potentiometer or the photoresistor. Things change. with the potentiometer, you need to go the photoresistor afterwards, so we tracked that using a variable named "time for photo" after that you need to reset it.
     welc.timeForPhoto = true;
     recap.resetQuestions();
     welc.previousFC = frameCount;
