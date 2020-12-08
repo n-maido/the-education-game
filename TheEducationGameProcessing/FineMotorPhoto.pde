@@ -21,7 +21,7 @@ class FineMotorPhoto{
     text("Put your finger on the sensor for " + targetSeconds + " seconds", width/10, 35);  
    
     //get the light sensor reading
-    //lightSensorValue = float(inputs.get("photoresistor"));
+    lightSensorValue = float(inputs.get("photoresistor"));
     println("Photoresistor: " + lightSensorValue);
     
     timeElapsedFinger = 0;
