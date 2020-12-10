@@ -31,7 +31,7 @@ class FineMotorPhoto{
     println("Photoresistor: " + lightSensorValue);
     
     //check if finger is placed on the sensor
-    if(lightSensorValue < 80){
+    if(lightSensorValue < 30){//change depending on environ
       if (countingStarted == false) {
         startCounting();
       }
