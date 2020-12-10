@@ -59,17 +59,21 @@ void draw() {
   //Checking the input. Two different scenes need different inputs so need two different functions
   if (welc.currentScene == "") {
     welc.checkInput();
-  } else if (welc.currentScene == "emote") {
+  
+  } 
+  else if (welc.currentScene == "emote") {
     welc.currentFC = frameCount;
-    print(welc.previousFC);
-    println(welc.currentFC);
-    if ((welc.currentFC - welc.previousFC) / 60 >= 2) {
+    // Start checking the buttons for emote after a delay of 2 sec?
+    /*
+    if ((welc.currentFC - welc.previousFC) / 60 >= 1) {
         welc.emote.checkInput();
-    }
+    } */   
   }
+  
 }
+
+//For bug testing on the computer that doesn't have the arduino
 void mouseClicked() {
-  //For bug testing on the computer that doesn't have the arduino
   if (welc.currentScene == "") {
     welc.checkMouseInput();
   } else if (welc.currentScene == "emote") {
@@ -139,7 +143,6 @@ public void questionCompleted(boolean correct, String scene) {
   }
   //If the number of questions is equal to the set amount of questions you're to do per section then it runs the recap.
   if (questionsCompleted == numQuestions && scene != "fineKnob" && scene != "finePhoto") {
-    println("knob and photo completed");
     recap.resetQuestions();
     welc.previousFC = frameCount;
     welc.currentScene = "recap";

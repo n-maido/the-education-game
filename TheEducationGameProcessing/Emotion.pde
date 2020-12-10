@@ -1,11 +1,12 @@
 class Emotion {
-  ArrayList<PImage> photos = new ArrayList<PImage>();
+  //ArrayList<PImage> photos = new ArrayList<PImage>();
   String correctEmotion;
-  ArrayList<ArrayList<String>> emotionChoices = new ArrayList<ArrayList<String>>();
+  //?: ArrayList<ArrayList<String>> emotionChoices = new ArrayList<ArrayList<String>>(); //?
+  ArrayList<String> emotionOptions = new ArrayList<String>();
   int currentPhoto = 0;
-  String answerChosen = "";
+  String answerChosen;
   
-  int question;
+  int randomEmotion; //a randomly generated int that determines which emotion to display
   boolean keepGenerating = true;
   
   //button specs
@@ -18,8 +19,9 @@ class Emotion {
   int faceWidth;
   
   Emotion() {
-    setupPhotos();
-    setupEmotions();
+    //setupPhotos();
+    setupEmotions(emotionOptions);//Fill our array with options
+    answerChosen = "";
     textY = height * 3/4;
     buttonY = textY - 30;
   }
@@ -32,6 +34,7 @@ class Emotion {
     rect(105, buttonY, 100, 50); //happy button
     textSize(25);
     fill(0);
+    /* Steven
     text(emotionChoices.get(currentPhoto).get(0), 100+20, textY); //option 1: happy
     fill(0, 0, 255);
     rect(350, buttonY, 100, 50); //sad button
@@ -41,6 +44,17 @@ class Emotion {
     rect(600, buttonY, 100, 50); //angry button
     fill(0);
     text(emotionChoices.get(currentPhoto).get(2), 600+20, textY); //option 3: angry
+    */
+    
+    text(emotionOptions.get(0), 100+20, textY); //option 1: happy
+    fill(0, 0, 255);
+    rect(350, buttonY, 100, 50); //sad button
+    fill(255);
+    text(emotionOptions.get(1), 350+20, textY); //option 2: sad
+    fill(255, 0, 0);
+    rect(600, buttonY, 100, 50); //angry button
+    fill(0);
+    text(emotionOptions.get(2), 600+20, textY); //option 3: angry
     
     //draw a blank face
     drawBlankFace();
@@ -48,47 +62,56 @@ class Emotion {
     //choose an emotion to display
     //fix:
     if (keepGenerating == true){
-      question = setupPhotos();
+      randomEmotion = generateEmotion();
     }
     
     //display the chosen emotion
-    //println("question: " + question);
-    switch(question){
-      case 1:
+    switch(randomEmotion){
+      case 0:
         addHappyFeatures();
-        correctEmotion = "happy";
+        correctEmotion = emotionOptions.get(0);
+        break;
+      case 1:
+        addSadFeatures();
+        correctEmotion = emotionOptions.get(1);
         break;
       case 2:
-        addSadFeatures();
-        correctEmotion = "sad";
-        break;
-      case 3:
         addAngryFeatures();
-        correctEmotion = "angry";
+        correctEmotion = emotionOptions.get(2);
         break;
+    }
+    
+    
+    if((welc.currentFC - welc.previousFC)/60 >= 1){
+      checkInput();
     }
   }
   
-  int setupPhotos() {
+  int generateEmotion() {
     keepGenerating = false;
-    question = int(random(1,3));
-    println(question);
-    return question;
+    randomEmotion = int(random(0,2));
+    println("We generated emotion " + randomEmotion);
+    return randomEmotion;
   }
   
-  void setupEmotions() {
+  void setupEmotions(ArrayList<String> emotionOptions) {
     //Adding the right emotion
     //emotions.add("happy");
     //Adding a multiple choice of emotions that will appear on screen
+    /* Steven
     ArrayList<String> temp = new ArrayList<String>();
     temp.add("happy");
     temp.add("sad");
     temp.add("angry");
     emotionChoices.add(temp);
+    */
+    emotionOptions.add("happy");
+    emotionOptions.add("sad");
+    emotionOptions.add("angry");
   }
   
   void checkInput() {
-    
+    /* Steven
     //Checks if the button pressed is the right one and then does the normal if right, then true. if wrong, then false stuff
     if (int(inputs.get("yellow button")) == 1) {
       answerChosen = emotionChoices.get(currentPhoto).get(0);
@@ -97,14 +120,27 @@ class Emotion {
     } else if (int(inputs.get("red button")) == 1) {
       answerChosen = emotionChoices.get(currentPhoto).get(2);
     }
+    */
+    
+    //Checks if the button pressed is the right one and then does the normal if right, then true. if wrong, then false stuff
+    if (int(inputs.get("yellow button")) == 1) {
+      answerChosen = emotionOptions.get(0);
+    } else if (int(inputs.get("blue button")) == 1) {
+      answerChosen = emotionOptions.get(1);
+    } else if (int(inputs.get("red button")) == 1) {
+      answerChosen = emotionOptions.get(2);
+    }
     
     if (answerChosen != "") {
       welc.previousFC = frameCount;
       if(answerChosen == correctEmotion) {        
         questionCompleted(true, "emote");
         keepGenerating = true;
+        answerChosen = "";
       } else {
         questionCompleted(false, "emote");
+        keepGenerating = true;
+        answerChosen = "";
       }
     }
   }

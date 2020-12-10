@@ -66,7 +66,7 @@ class Welcome {
         finePhoto.drawCounter();
       }
       //Emotion Section
-      else if (currentScene == "emote") {    
+      else if (currentScene == "emote"){
         emote.drawMe();
       }
     } else{
@@ -92,8 +92,7 @@ class Welcome {
   
   int checkInput() {
     //Checking input for the welcome screen
-    if (int(inputs.get("yellow button")) == 1) {
-      
+    if (int(inputs.get("yellow button")) == 1) {      
       changeScene("math");
       previousFC = frameCount;
       return 1;
