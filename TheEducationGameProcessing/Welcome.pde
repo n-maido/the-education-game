@@ -10,6 +10,7 @@ class Welcome {
   boolean timeForPhoto;
   int currentFC = 0;
   int previousFC;
+  int resultDisplayTime; //how many seconds to display our results screens for
   
   void setupWelcome() {
     math = new Arithmetic();
@@ -19,6 +20,7 @@ class Welcome {
     corr = new correctAnswer();
     inCorr = new inCorrectAnswer();
     currentScene = "";
+    resultDisplayTime = 2;
   }
   
   void drawMe() {
@@ -28,8 +30,8 @@ class Welcome {
       if (currentScene == "corr") {
          corr.drawMe();
          currentFC = frameCount;
-         //Checks if it has been 5 seconds and then resets.
-         if ((currentFC - previousFC) / 60 == 5) {
+         //Checks if it has been 2 seconds and then resets.
+         if ((currentFC - previousFC) / 60 == resultDisplayTime) {
            currentScene = previousScene;
          }
          //InCorr is incorrect
@@ -37,7 +39,7 @@ class Welcome {
         inCorr.drawMe();
         currentFC = frameCount;
         //Same 5 seconds
-        if ((currentFC - previousFC) / 60 == 5) {
+        if ((currentFC - previousFC) / 60 == resultDisplayTime) {
           currentScene = previousScene;
         }
         //Recap is the recap after each scene
@@ -45,7 +47,7 @@ class Welcome {
         recap.drawMe();
         currentFC = frameCount;
         //Same 5 seconds except for the fine photo and stuff
-        if ((currentFC - previousFC) / 60 == 5) {
+        if ((currentFC - previousFC) / 60 == resultDisplayTime) {
           if (timeForPhoto == true) {
             currentScene = "finePhoto";
           } else {
@@ -59,14 +61,12 @@ class Welcome {
         //Potentiometer section
       } else if (currentScene == "fineKnob") {
         fineKnob.drawKnob();
-        //finePhoto.drawCounter();
         //Photoresistor section
       } else if (currentScene == "finePhoto"){
         finePhoto.drawCounter();
       }
       //Emotion Section
-      else if (currentScene == "emote") {
-        
+      else if (currentScene == "emote") {    
         emote.drawMe();
       }
     } else{
@@ -74,6 +74,7 @@ class Welcome {
       fill(0, 0, 0);
       textSize(32);
       text("Hello", 200, 200);
+      //draw buttons
       fill(255, 255, 0);
       rect(100, 300, 100, 50);
       fill(0);
