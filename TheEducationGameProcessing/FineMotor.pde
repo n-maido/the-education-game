@@ -12,7 +12,7 @@ class FineMotor{
   void drawKnob() {
     try {
       println("Potentiometer: " + inputs.get("potentiometer"));
-      currentHeight = map(float(inputs.get("potentiometer")), 92, 1020, 0, 500);
+      currentHeight = map(float(inputs.get("potentiometer")), 14, 1015, 0, 500); //Pot max: 1015, min: 14
       
     } catch(Exception e) {
       currentHeight = 250;
