@@ -12,6 +12,10 @@ class Welcome {
   int previousFC;
   int resultDisplayTime; //how many seconds to display our results screens for
   
+  //button variables
+  int buttonWidth;
+  int buttonHeight;
+  
   void setupWelcome() {
     math = new Arithmetic();
     emote = new Emotion();
@@ -21,6 +25,8 @@ class Welcome {
     inCorr = new inCorrectAnswer();
     currentScene = "";
     resultDisplayTime = 2;
+    buttonWidth = 182;
+    buttonHeight = 50;
   }
   
   void drawMe() {
@@ -74,19 +80,26 @@ class Welcome {
       fill(0, 0, 0);
       textSize(32);
       text("Hello", 200, 200);
-      //draw buttons
+      //draw arithmetic button
       fill(255, 255, 0);
-      rect(100, 300, 100, 50);
+      rect(100, 300, buttonWidth, buttonHeight);
       fill(0);
-      text("1", 142.5, 335);
+      text("Arithmetic", 110, 335);
+      //Emotion button
       fill(0, 0, 255);
-      rect(350, 300, 100, 50);
+      rect(350, 300, buttonWidth, buttonHeight);
       fill(0);
-      text("2", 392.5, 335);
+      text("Emotions", 392.5, 335);
+      //Fine Motor button
       fill(255, 0, 0);
-      rect(600, 300, 100, 50);
+      rect(600, 300, buttonWidth, buttonHeight);
       fill(0);
-      text("3", 642.5, 335);
+      text("Fine Motor", 642.5, 335);
+      //Exit button
+      fill(0, 255, 255);
+      rect(850, 300, buttonWidth, buttonHeight);
+      fill(0);
+      text("Exit", 892.5, 335);
     }
   }
   

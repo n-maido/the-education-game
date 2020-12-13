@@ -12,7 +12,7 @@ public ArrayList<Boolean> questions;
 AnswerRecap recap;
 
 void setup() {
-  size(800, 600);
+  size(1132, 700); //+50 to orig height
   printArray(Serial.list());
   //check for the current OS and open the appropriate port
   if (System.getProperty("os.name").contains("Windows")) {
