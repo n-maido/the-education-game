@@ -32,7 +32,7 @@ class Arithmetic {
     }
     
     //Steven: text(currentQuestion + answer, width/3, height/2);
-    text(addend1 + " + " + addend2 + " = " + answer, width/3, height/2);
+    text(addend1 + " + " + addend2 + " = " + answer, width/4, height/2);
   }
   
   /*

@@ -23,7 +23,7 @@ class FineMotorPhoto{
     //display the prompt
     background(255);
     textAlign(CENTER);
-    textSize(35);
+    textSize(45);
     text("Put your finger on the sensor for " + targetSeconds + " seconds", width/2, height/2);  
    
     //get the light sensor reading
@@ -44,8 +44,8 @@ class FineMotorPhoto{
       //timeElapsedFinger = timeElapsedProgram -1;
       println(timeElapsedFinger);
       background(255);
-      textSize(150);
-      text(timeElapsedFinger, width/2, height/2);
+      textSize(200);
+      text(timeElapsedFinger, width/2, height/2 + 25);
       if (timeElapsedFinger > targetSeconds) {
         println("photo q finished");
         questionCompleted(true, "finePhoto");
