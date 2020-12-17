@@ -18,18 +18,24 @@ class FineMotor{
       currentHeight = 250;
     }
     
+    //Draw text
     background(255);
+    fill(0);
+    textSize(38);
+    text("Twist the knob until they match", 275, 70);
+    
+    //Draw rectangle outlines
     fill(255);
     stroke(0);
-    rect(width/5, 50, 150, 500);
-    rect(width * 3/5, 50, 150, 500);
+    rect(275, 125, 150, 500);
+    rect(707, 125, 150, 500);
+    
+    //Draw rectangle fills
     fill(255, 255, 0);
-    rect(width/5, 550-yellowHeight, 150, yellowHeight);
+    rect(275, 625-yellowHeight, 150, yellowHeight); //550 is the height of the rectangle outline
     fill(0, 0, 255);
-    rect(width * 3/5, 550-currentHeight, 150, currentHeight);
-    fill(0);
-    textSize(40);
-    text("Twist the knob until they match", width/10, 35);
+    rect(707, 625-currentHeight, 150, currentHeight);
+    
     //Giving the user a bit of a buffer to get right.
     if (currentHeight >= yellowHeight-10 && currentHeight <= yellowHeight+10) {
       questionCompleted(true, "fineKnob");
