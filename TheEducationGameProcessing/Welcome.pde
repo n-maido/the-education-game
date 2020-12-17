@@ -15,6 +15,7 @@ class Welcome {
   //button variables
   int buttonWidth;
   int buttonHeight;
+  int buttonY;
   
   void setupWelcome() {
     math = new Arithmetic();
@@ -27,6 +28,7 @@ class Welcome {
     resultDisplayTime = 2;
     buttonWidth = 182;
     buttonHeight = 50;
+    buttonY = 450;
   }
   
   void drawMe() {
@@ -77,29 +79,38 @@ class Welcome {
       }
     } else{
       background(255);
-      fill(0, 0, 0);
-      textSize(32);
-      text("Hello", 200, 200);
-      //draw arithmetic button
-      fill(255, 255, 0);
-      rect(100, 300, buttonWidth, buttonHeight);
+      
+      //welcome text
       fill(0);
-      text("Arithmetic", 110, 335);
+      textSize(58);
+      text("Welcome to The Education Game!", 100, 250);
+      textSize(32);
+      text("Please choose an option:", 100, 400);
+      
+      //draw arithmetic button
+      textSize(32);
+      fill(255, 255, 0);
+      rect(100, buttonY, buttonWidth, buttonHeight);
+      fill(0);
+      text("Arithmetic", 110, buttonY + 35);
+      
       //Emotion button
       fill(0, 0, 255);
-      rect(350, 300, buttonWidth, buttonHeight);
+      rect(350, buttonY, buttonWidth, buttonHeight);
       fill(0);
-      text("Emotions", 392.5, 335);
+      text("Emotions", 372, buttonY + 35);
+      
       //Fine Motor button
       fill(255, 0, 0);
-      rect(600, 300, buttonWidth, buttonHeight);
+      rect(600, buttonY, buttonWidth, buttonHeight);
       fill(0);
-      text("Fine Motor", 642.5, 335);
+      text("Fine Motor", 608, buttonY + 35);
+      
       //Exit button
-      fill(0, 255, 255);
-      rect(850, 300, buttonWidth, buttonHeight);
+      fill(0, 255, 0);
+      rect(850, buttonY, buttonWidth, buttonHeight);
       fill(0);
-      text("Exit", 892.5, 335);
+      text("Exit", 910, buttonY + 35);
     }
   }
   
