@@ -12,6 +12,7 @@ class Emotion {
   //button specs
   int textY; //y-coord of our button text
   int buttonY; //y-coord of our button
+  int centerButtonX; //x-coord of the center button
   
   //template specs
   int faceX;
@@ -23,7 +24,8 @@ class Emotion {
     setupEmotions(emotionOptions);//Fill our array with options
     answerChosen = "";
     textY = height * 3/4;
-    buttonY = textY - 30;
+    buttonY = textY - 32;
+    centerButtonX = width/2-50;
   }
   
   void drawMe() {
@@ -31,9 +33,7 @@ class Emotion {
     background(255);
     fill(0, 0, 0);
     fill(255, 255, 0);
-    rect(105, buttonY, 100, 50); //happy button
-    textSize(25);
-    fill(0);
+    
     /* Steven
     text(emotionChoices.get(currentPhoto).get(0), 100+20, textY); //option 1: happy
     fill(0, 0, 255);
@@ -46,15 +46,18 @@ class Emotion {
     text(emotionChoices.get(currentPhoto).get(2), 600+20, textY); //option 3: angry
     */
     
-    text(emotionOptions.get(0), 100+20, textY); //option 1: happy
-    fill(0, 0, 255);
-    rect(350, buttonY, 100, 50); //sad button
-    fill(255);
-    text(emotionOptions.get(1), 350+20, textY); //option 2: sad
-    fill(255, 0, 0);
-    rect(600, buttonY, 100, 50); //angry button
+    rect(centerButtonX - 200, buttonY, 100, 50); //happy button
+    textSize(25);
     fill(0);
-    text(emotionOptions.get(2), 600+20, textY); //option 3: angry
+    text(emotionOptions.get(0), centerButtonX - 187, textY); //option 1: happy
+    fill(0, 0, 255);
+    rect(centerButtonX, buttonY, 100, 50); //sad button
+    fill(255);
+    text(emotionOptions.get(1), centerButtonX + 27, textY); //option 2: sad
+    fill(255, 0, 0);
+    rect(centerButtonX + 200, buttonY, 100, 50); //angry button
+    fill(0);
+    text(emotionOptions.get(2), centerButtonX + 217, textY); //option 3: angry
     
     //draw a blank face
     drawBlankFace();

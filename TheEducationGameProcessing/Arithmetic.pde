@@ -25,7 +25,7 @@ class Arithmetic {
   void drawMe() {
     background(255);
     fill(0);
-    textSize(72);
+    textSize(92);
     
     if(keepGenerating == true){
       setupQuestions();
