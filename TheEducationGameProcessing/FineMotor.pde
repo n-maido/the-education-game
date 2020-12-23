@@ -21,8 +21,8 @@ class FineMotor{
     //Draw text
     background(255);
     fill(0);
-    textSize(38);
-    text("Twist the knob until they match", 275, 70);
+    textSize(37);
+    text("Twist the knob until they match:", 275, 70);
     
     //Draw rectangle outlines
     fill(255);

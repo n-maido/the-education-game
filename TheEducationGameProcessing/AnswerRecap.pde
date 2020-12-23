@@ -25,10 +25,11 @@ class AnswerRecap {
       background(255, 0, 0);
     }
     fill(0);
-    textSize(72);
-    //Displaying your result
-    text("You got ", width/10, height/2);
-    text(str(correctAnswers()) + " out of " + str(qs.size()), width/2, height/2);
+    //Display results
+    textSize(85);
+    text("You got " + str(correctAnswers()) + " out of " + str(qs.size()), width/5, height/2);//w/3
+    //textSize(75);
+    //text(, width/3 - 40, height/2 + 75);
   }
   
   int correctAnswers() {
