@@ -1,89 +1,100 @@
+/*
+ * TheEducationGameProcessing.pde
+ *
+ * Description: Handles serial communication, handles scene changes, and keeps track of completed questions and answers
+ *
+ * Authors: Nhi Mai-Do, Steven Kobza
+ *
+*/
 import processing.serial.*;
 
+//Serial vars
 Serial myPort;
-Welcome welc;
-correctAnswer corr;
-public StringDict inputs;
 byte[] inBuffer = new byte[255];
 int port = 1;
+
+//Scene objects
+Welcome welc;
+correctAnswer corr;
+AnswerRecap recap; 
+
+//Question-handling vars
+public StringDict inputs;
 int numQuestions = 3;
 int questionsCompleted;
 public ArrayList<Boolean> questions;
-AnswerRecap recap;
+
 
 void setup() {
-  size(1132, 700); //+50 to orig height
+  size(1132, 700); 
+  
+  //Set up serial communication
   printArray(Serial.list());
   //check for the current OS and open the appropriate port
   if (System.getProperty("os.name").contains("Windows")) {
-    port = 1;
-    //port = 0;
+    port = 1; //change to your computer's serial port
   } else {
     port = 3;
   }
-  myPort = new Serial(this, Serial.list()[port], 9600); //mod to serial port of my comp
-  //Creating a welcome scene and setting it up
+  myPort = new Serial(this, Serial.list()[port], 9600);
+  
+  //Initialize welcome and answer screens
   welc = new Welcome();
   welc.setupWelcome();
   corr = new correctAnswer();
-  //Setting up the string dictionary to track the button inputs
+  
+  //Set up the string dictionary to track the button inputs
   inputs = new StringDict();
   frameRate(60);
   inputs.set("yellow button", "0");
   inputs.set("blue button", "0");
   inputs.set("red button", "0");
   inputs.set("green button", "0");
-  //Setting up the arraylist to track the questions
+  
+  //Set up the arraylist to track the questions
   questions = new ArrayList<Boolean>();
-  //Test questions that get deleted
-  questions.add(true);
-  questions.add(false);
-  questions.add(true);
+  //Initialize recap screen
   recap = new AnswerRecap();
 }
 
 void draw() {
-  background(#ffffff);
+  background(255);
+  
+  //Read serial input
   if(myPort.available() > 0) {
-    //Reading the bytes until our break character in the arduino code
+    //Read the bytes until our break character in the arduino code
     myPort.readBytesUntil('&', inBuffer);
     if(inBuffer != null){
       String inByte = new String(inBuffer);
-      getInputOfSerial(inByte);
-      
-    }
-    
+      getInputOfSerial(inByte);     
+    }   
   }
-  //Drawing the welcome scene
-  welc.drawMe();
-  //Checking the input. Two different scenes need different inputs so need two different functions
-  if (welc.currentScene == "") {
-    welc.checkInput();
   
+  //Draw welcome scene
+  welc.drawMe();
+  //Check the input. Two different scenes need different inputs, so we need two different functions
+  if (welc.currentScene == "") {
+    welc.checkInput(); 
   } 
   else if (welc.currentScene == "emote") {
-    welc.currentFC = frameCount;
-    // Start checking the buttons for emote after a delay of 2 sec?
-    /*
-    if ((welc.currentFC - welc.previousFC) / 60 >= 1) {
-        welc.emote.checkInput();
-    } */   
+    welc.currentFC = frameCount; 
   }
   
 }
 
-//For bug testing on the computer that doesn't have the arduino
+//Description: Checks if the on-screen buttons have been clicked. For bug testing on the computer, when you don't have access to the hardware. 
 void mouseClicked() {
   if (welc.currentScene == "") {
     welc.checkMouseInput();
   } else if (welc.currentScene == "emote") {
-    //welc.emote.checkInput();
+    welc.emote.checkInput();
   }
 }
 
+//Description: Reads incoming data from the serial port
 void getInputOfSerial(String inByte) {
   //Splitting strings based on the index of the splitting variables
-  //Yellow button
+  //yellow button
   int tempYellow = inByte.indexOf("y");
   int tempEndYellow = inByte.indexOf("y", tempYellow+1);
   if (tempYellow != -1) {
@@ -93,7 +104,7 @@ void getInputOfSerial(String inByte) {
   int tempBlue = inByte.indexOf("b");
   int tempEndBlue = inByte.indexOf("b", tempBlue+1);
   if (tempBlue != -1) {
-    inputs.set("blue button", inByte.substring(tempBlue + 1, tempEndBlue)); //Blue starts and ends at same index, and so on for the rest of the inputs
+    inputs.set("blue button", inByte.substring(tempBlue + 1, tempEndBlue));
   }
   //red button
   int tempRed = inByte.indexOf("r");
@@ -107,7 +118,7 @@ void getInputOfSerial(String inByte) {
   if (tempGreen != -1) {
     inputs.set("green button", inByte.substring(tempGreen + 1, tempEndGreen));
   }
-  //photo resistor
+  //photoresistor
   int tempPhoto = inByte.indexOf("a");
   int tempEndPhoto = inByte.indexOf("a", tempPhoto+1);
   if (tempPhoto != -1) {
@@ -121,17 +132,19 @@ void getInputOfSerial(String inByte) {
   }
 }
 
+//Description: Displays the requested screen
 public void changeScene(String newScene) {
-  //Function to change scene so that it's easier to do
   welc.currentScene = newScene;
   welc.previousFC = frameCount;
 }
 
+//Description: Keep track of completed questions
 public void questionCompleted(boolean correct, String scene) {
-  //Function to track which questions are correct
   questionsCompleted++;
-  println("questions completed: " + questionsCompleted);
-  //If it's true, add a true to the arraylist and then set the scene passed to be the previous scene. Otherwise add a false and do the same thing. Corr is the correctAnswer scene, inCorr is incorrect.
+  println("questions completed: " + questionsCompleted);//for troubleshooting
+  
+  //If we received a correct answer, add a "true" to the arraylist, otherwise add a "false". Then, set the scene passed to be the previous scene. 
+  //Corr is the correctAnswer scene, inCorr is incorrect.
   if (correct == true) {
     questions.add(true);
     welc.previousScene = scene;
@@ -147,13 +160,19 @@ public void questionCompleted(boolean correct, String scene) {
     welc.previousFC = frameCount;
     welc.currentScene = "recap";
     questionsCompleted = 0;
+  
+  //Check if we're in the potentiometer section
   } else if (questionsCompleted == numQuestions && scene == "fineKnob") {
-    //If you're on either the potentiometer or the photoresistor. Things change. with the potentiometer, you need to go the photoresistor afterwards, so we tracked that using a variable named "time for photo" after that you need to reset it.
+    //A different way of handling scene changes is required in the potentiometer section.
+    //In the potentiometer section, we need to go the photoresistor afterwards, so we tracked that using a variable named "time for photo".
+    //After that, we reset the scene and questions
     welc.timeForPhoto = true;
     recap.resetQuestions();
     welc.previousFC = frameCount;
-    welc.currentScene = "recap";
-    questionsCompleted = 0;
+    welc.currentScene = "recap"; //move on to the question recap scene
+    questionsCompleted = 0; //reset questions
+    
+  //Check if we're in the photoresistor section
   } else if (questionsCompleted % numQuestions == 0 && scene == "finePhoto") {
     println("photo completed");
     welc.timeForPhoto = false;
@@ -164,7 +183,8 @@ public void questionCompleted(boolean correct, String scene) {
   }
 }
 
-void keyPressed() {
+//Description: Checks for keyboard inputs
+void keyPressed() { 
   switch(welc.currentScene) {
     case "math":
       welc.math.mathKeyPressed(key);
