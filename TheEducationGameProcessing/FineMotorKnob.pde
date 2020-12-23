@@ -1,9 +1,9 @@
-class FineMotor{
+class FineMotorKnob{
   //variables for the knob question
   float yellowHeight;
   float currentHeight;
   
-  FineMotor() {
+  FineMotorKnob() {
     //set up knob question
     yellowHeight = random(500);
     

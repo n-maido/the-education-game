@@ -1,5 +1,6 @@
-class correctAnswer {
+class CorrectAnswer {
   String previousScene;
+  
   void drawMe() {
 
     background(0, 255, 0);

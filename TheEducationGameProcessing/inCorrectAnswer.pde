@@ -1,4 +1,4 @@
-class inCorrectAnswer {
+class IncorrectAnswer {
   String previousScene;
   
   void drawMe() {

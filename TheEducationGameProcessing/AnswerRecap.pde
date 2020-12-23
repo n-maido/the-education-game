@@ -1,6 +1,16 @@
+/*
+ * AnswerRecap.pde
+ *
+ * Description: Keeps track of correct/incorrect answers. When a section concludes, displays the amount of correct answers compared to total questions.
+ *
+ * Authors: Nhi Mai-Do, Steven Kobza
+ *
+*/
+
 class AnswerRecap {
   //Arraylist to track all of the questions
   ArrayList<Boolean> qs = new ArrayList<Boolean>();
+  
   AnswerRecap() {
     //Adding all to the qs arraylist, and then clearing the questions arraylist.
     qs.addAll(questions);
@@ -27,7 +37,7 @@ class AnswerRecap {
     fill(0);
     //Display results
     textSize(85);
-    text("You got " + str(correctAnswers()) + " out of " + str(qs.size()), width/5, height/2);//w/3
+    text("You got " + str(correctAnswers()) + " out of " + str(qs.size()), width/5 - 20, height/2);//w/3
     //textSize(75);
     //text(, width/3 - 40, height/2 + 75);
   }

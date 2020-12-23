@@ -1,10 +1,10 @@
 class Welcome {
   Arithmetic math;
   Emotion emote;
-  FineMotor fineKnob;
+  FineMotorKnob fineKnob;
   FineMotorPhoto finePhoto;
-  correctAnswer corr;
-  inCorrectAnswer inCorr;
+  CorrectAnswer corr;
+  IncorrectAnswer inCorr;
   public String currentScene;
   public String previousScene;
   boolean timeForPhoto;
@@ -20,10 +20,10 @@ class Welcome {
   void setupWelcome() {
     math = new Arithmetic();
     emote = new Emotion();
-    fineKnob = new FineMotor();
+    fineKnob = new FineMotorKnob();
     finePhoto = new FineMotorPhoto();
-    corr = new correctAnswer();
-    inCorr = new inCorrectAnswer();
+    corr = new CorrectAnswer();
+    inCorr = new IncorrectAnswer();
     currentScene = "";
     resultDisplayTime = 2;
     buttonWidth = 182;
