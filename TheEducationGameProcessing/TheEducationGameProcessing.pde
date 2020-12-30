@@ -15,7 +15,7 @@ int port = 1;
 
 //Scene objects
 Welcome welc;
-CorrectAnswer corr;
+//CorrectAnswer corr;
 AnswerRecap recap; 
 
 //Question-handling vars
@@ -41,7 +41,7 @@ void setup() {
   //Initialize welcome and answer screens
   welc = new Welcome();
   welc.setupWelcome();
-  corr = new CorrectAnswer();
+  //corr = new CorrectAnswer();
   
   //Set up the string dictionary to track the button inputs
   inputs = new StringDict();

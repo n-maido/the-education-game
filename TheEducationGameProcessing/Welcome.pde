@@ -1,16 +1,30 @@
+/*
+ * Welcome.pde
+ *
+ * Description: Displays the main menu, handles user input, and displays the selected question section
+ *
+ * Authors: Nhi Mai-Do, Steven Kobza
+ *
+*/
 class Welcome {
+  //Scene objects
   Arithmetic math;
   Emotion emote;
   FineMotorKnob fineKnob;
   FineMotorPhoto finePhoto;
   CorrectAnswer corr;
   IncorrectAnswer inCorr;
+  
+  //Vars to keep track of cur and prev scene
   public String currentScene;
   public String previousScene;
-  boolean timeForPhoto;
+  
+  //Cur and prev frame count
   int currentFC = 0;
   int previousFC;
-  int resultDisplayTime; //how many seconds to display our results screens for
+  
+  boolean timeForPhoto; //keeps track of when to move on to part 2 of our 2-part fine motor section
+  int resultDisplayTime; //how many seconds to display our result screen for
   
   //button variables
   int buttonWidth;
@@ -18,20 +32,24 @@ class Welcome {
   int buttonY;
   
   void setupWelcome() {
+    //Initiate scene objects
     math = new Arithmetic();
     emote = new Emotion();
     fineKnob = new FineMotorKnob();
     finePhoto = new FineMotorPhoto();
     corr = new CorrectAnswer();
     inCorr = new IncorrectAnswer();
+    
     currentScene = "";
-    resultDisplayTime = 2;
+    resultDisplayTime = 2; //we will display our result screen for 2 secs
     buttonWidth = 182;
     buttonHeight = 50;
     buttonY = 450;
   }
   
+  //Description: Draws the main menu, displays the selected section
   void drawMe() {
+    //Change to the appropriate section, according to the received input
     //Current Scene is the way we track which scene we're on.
     if (currentScene != "") {
       //Corr is correct Answer
@@ -46,11 +64,10 @@ class Welcome {
       } else if (currentScene == "inCorr") {
         inCorr.drawMe();
         currentFC = frameCount;
-        //Same 5 seconds
         if ((currentFC - previousFC) / 60 == resultDisplayTime) {
           currentScene = previousScene;
         }
-        //Recap is the recap after each scene
+        //Recap displays the results after each section
       } else if (currentScene == "recap") {
         recap.drawMe();
         currentFC = frameCount;
@@ -78,16 +95,17 @@ class Welcome {
         emote.drawMe();
       }
     } else{
+      //Draw the main menu
       background(255);
       
-      //welcome text
+      //Welcome text
       fill(0);
       textSize(58);
       text("Welcome to The Education Game!", 100, 250);
       textSize(32);
       text("Please choose an option:", 100, 400);
       
-      //draw arithmetic button
+      //Arithmetic button
       textSize(32);
       fill(255, 255, 0);
       rect(100, buttonY, buttonWidth, buttonHeight);
@@ -114,10 +132,10 @@ class Welcome {
     }
   }
   
-  int checkInput() {
-    //Checking input for the welcome screen
+  //Description: Checks button input for the main menu, sets the current scene to the corresponding section
+  int checkInput() {    
     if (int(inputs.get("yellow button")) == 1) {      
-      changeScene("math");
+      currentScene = "math";
       previousFC = frameCount;
       return 1;
     } else if (int(inputs.get("blue button")) == 1) {
@@ -134,9 +152,11 @@ class Welcome {
     
     
   }
+  
+  //Description: Changes scene according to the button that's been clicked. For bug testing on the computer, when you don't have access to the hardware. 
   int checkMouseInput() {
     if (mouseX <= 200 && mouseX >= 100 && mouseY <= 350 && mouseY >= 300) {
-      changeScene("math");
+      currentScene = "math";
       previousFC = frameCount;
       return 1;
     } else if (mouseX <= 450 && mouseX >= 350 && mouseY <= 350 && mouseY >= 300) {
@@ -149,12 +169,5 @@ class Welcome {
     } else {
       return -1;
     }
-  }
-  
-  void correctInput() {
-    corr.drawMe();
-  }
-  
-  void incorrectInput() {
   }
 }
