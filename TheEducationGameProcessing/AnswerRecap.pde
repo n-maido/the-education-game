@@ -1,9 +1,9 @@
 /*
  * AnswerRecap.pde
  *
- * Description: Keeps track of correct/incorrect answers. When a section concludes, displays the amount of correct answers compared to total questions.
+ * Description: Keeps track of correct/incorrect answers. When a section concludes, displays how many questions the user answered correctly
  *
- * Authors: Nhi Mai-Do, Steven Kobza
+ * Authors: Steven Kobza, Nhi Mai-Do
  *
 */
 
@@ -27,8 +27,10 @@ class AnswerRecap {
       println("questions" + str(questions.get(i)));
     }
   }
+  
+  //Description: Displays the result screen, showing the users how many questions they answered correctly
   void drawMe() {
-    //If you pass, get green, else get red.
+    //If a passing score is achieved, display a green screen. Otherwise display a red screen
     if (correctAnswers() / qs.size() > 0.5) {
       background(0, 255, 0);
     } else {
@@ -38,18 +40,18 @@ class AnswerRecap {
     //Display results
     textSize(85);
     text("You got " + str(correctAnswers()) + " out of " + str(qs.size()), width/5 - 20, height/2);//w/3
-    //textSize(75);
-    //text(, width/3 - 40, height/2 + 75);
   }
   
+  //Description: Counts the number of correct answers
   int correctAnswers() {
-    int tempRight = 0;
+    int tempRight = 0; //keeps track of # of right answers
     for (int i = 0; i < qs.size(); i++) {
       println("qs" + str(qs.get(i)));
       if (qs.get(i) == true) {
         tempRight++;
       }
     }
+    println(tempRight);
     return tempRight;
   }
 }
