@@ -31,7 +31,7 @@ class AnswerRecap {
   //Description: Displays the result screen, showing the users how many questions they answered correctly
   void drawMe() {
     //If a passing score is achieved, display a green screen. Otherwise display a red screen
-    if (correctAnswers() / qs.size() > 0.5) {
+    if (float(correctAnswers()) / float(qs.size()) > 0.5) {
       background(0, 255, 0);
     } else {
       background(255, 0, 0);
