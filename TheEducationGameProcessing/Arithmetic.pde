@@ -15,7 +15,7 @@ class Arithmetic {
   int sum;
   
   String answer = ""; //Store user input as a string
-  boolean keepGenerating = true;
+  boolean keepGenerating = true; //this bool will toggle our question generator on/off
   
   Arithmetic() {
   }
@@ -34,7 +34,7 @@ class Arithmetic {
   }
   
  
-  //Description: Checks if user's answer is correct. Concludes the question by calling questionCompleted() and resets variables
+  //Description: Checks if user's answer is correct. Concludes the question by calling questionCompleted() and resetting variables
   void checkAnswer() {   
     try{
       if(int(answer) == sum){

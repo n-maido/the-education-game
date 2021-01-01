@@ -1,13 +1,19 @@
+/*
+ * Arithmetic.pde
+ *
+ * Description: The emotion recognition section. Draws a randomized cartoon facial expression, taking button inputs as a response
+ *
+ * Authors: Nhi Mai-Do, Steven Kobza
+ *
+*/
+
 class Emotion {
-  //ArrayList<PImage> photos = new ArrayList<PImage>();
+  //question variables
+  ArrayList<String> emotionOptions = new ArrayList<String>(); //store each emotion option in an array
   String correctEmotion;
-  //?: ArrayList<ArrayList<String>> emotionChoices = new ArrayList<ArrayList<String>>(); //?
-  ArrayList<String> emotionOptions = new ArrayList<String>();
-  int currentPhoto = 0;
-  String answerChosen;
-  
+  String answerChosen; //user input  
   int randomEmotion; //a randomly generated int that determines which emotion to display
-  boolean keepGenerating = true;
+  boolean keepGenerating = true; //this bool will toggle our question generator on/off
   
   //button specs
   int textY; //y-coord of our button text
@@ -20,7 +26,6 @@ class Emotion {
   int faceWidth;
   
   Emotion() {
-    //setupPhotos();
     setupEmotions(emotionOptions);//Fill our array with options
     answerChosen = "";
     textY = height * 3/4;
@@ -28,43 +33,36 @@ class Emotion {
     centerButtonX = width/2-50;
   }
   
+  //Description: Displays the question, the answer buttons, and verifies input
   void drawMe() {
     //display buttons/options
     background(255);
     fill(0, 0, 0);
     fill(255, 255, 0);
     
-    /* Steven
-    text(emotionChoices.get(currentPhoto).get(0), 100+20, textY); //option 1: happy
-    fill(0, 0, 255);
-    rect(350, buttonY, 100, 50); //sad button
-    fill(255);
-    text(emotionChoices.get(currentPhoto).get(1), 350+20, textY); //option 2: sad
-    fill(255, 0, 0);
-    rect(600, buttonY, 100, 50); //angry button
-    fill(0);
-    text(emotionChoices.get(currentPhoto).get(2), 600+20, textY); //option 3: angry
-    */
-    
-    rect(centerButtonX - 200, buttonY, 100, 50); //happy button
+    //happy button
+    rect(centerButtonX - 200, buttonY, 100, 50); 
     textSize(25);
     fill(0);
-    text(emotionOptions.get(0), centerButtonX - 187, textY); //option 1: happy
+    text(emotionOptions.get(0), centerButtonX - 187, textY); 
     fill(0, 0, 255);
-    rect(centerButtonX, buttonY, 100, 50); //sad button
+    
+    //sad button
+    rect(centerButtonX, buttonY, 100, 50); 
     fill(255);
-    text(emotionOptions.get(1), centerButtonX + 27, textY); //option 2: sad
+    text(emotionOptions.get(1), centerButtonX + 27, textY); 
     fill(255, 0, 0);
-    rect(centerButtonX + 200, buttonY, 100, 50); //angry button
+    
+    //angry button
+    rect(centerButtonX + 200, buttonY, 100, 50); 
     fill(0);
-    text(emotionOptions.get(2), centerButtonX + 217, textY); //option 3: angry
+    text(emotionOptions.get(2), centerButtonX + 217, textY); 
     
     //draw a blank face
     drawBlankFace();
     
     //choose an emotion to display
-    //fix:
-    if (keepGenerating == true){
+    if (keepGenerating == true){ //This bool will always be true upon launch. Every time we enter an emotion section, we generate a new question
       randomEmotion = generateEmotion();
     }
     
@@ -83,49 +81,31 @@ class Emotion {
         correctEmotion = emotionOptions.get(2);
         break;
     }
-    
-    
+      
+    //check input after a delay of 1 sec   
     if((welc.currentFC - welc.previousFC)/60 >= 1){
       checkInput();
     }
   }
   
+  //Description: Generates a random emotion, by generating a random int between 0 and 2
   int generateEmotion() {
-    keepGenerating = false;
-    randomEmotion = int(random(0,2));
+    keepGenerating = false; //Once this function is called, we can stop generating questions
+    randomEmotion = int(random(0,2)); //The number we generate corresponds to the array index that the emotions are stored at
     println("We generated emotion " + randomEmotion);
     return randomEmotion;
   }
   
+  //Description: Appends our emotion options to an array
   void setupEmotions(ArrayList<String> emotionOptions) {
-    //Adding the right emotion
-    //emotions.add("happy");
-    //Adding a multiple choice of emotions that will appear on screen
-    /* Steven
-    ArrayList<String> temp = new ArrayList<String>();
-    temp.add("happy");
-    temp.add("sad");
-    temp.add("angry");
-    emotionChoices.add(temp);
-    */
     emotionOptions.add("happy");
     emotionOptions.add("sad");
     emotionOptions.add("angry");
   }
   
+  //Description: Checks if user's answer is correct. Concludes the question by calling questionCompleted() and resetting variables
   void checkInput() {
-    /* Steven
-    //Checks if the button pressed is the right one and then does the normal if right, then true. if wrong, then false stuff
-    if (int(inputs.get("yellow button")) == 1) {
-      answerChosen = emotionChoices.get(currentPhoto).get(0);
-    } else if (int(inputs.get("blue button")) == 1) {
-      answerChosen = emotionChoices.get(currentPhoto).get(1);
-    } else if (int(inputs.get("red button")) == 1) {
-      answerChosen = emotionChoices.get(currentPhoto).get(2);
-    }
-    */
-    
-    //Checks if the button pressed is the right one and then does the normal if right, then true. if wrong, then false stuff
+    //Checks which button was pressed and sets the user's answer accordingly
     if (int(inputs.get("yellow button")) == 1) {
       answerChosen = emotionOptions.get(0);
     } else if (int(inputs.get("blue button")) == 1) {
@@ -134,11 +114,12 @@ class Emotion {
       answerChosen = emotionOptions.get(2);
     }
     
+    //Concludes the question
     if (answerChosen != "") {
       welc.previousFC = frameCount;
       if(answerChosen == correctEmotion) {        
         questionCompleted(true, "emote");
-        keepGenerating = true;
+        keepGenerating = true; //we reset this so that it will always be true upon launch
         answerChosen = "";
       } else {
         questionCompleted(false, "emote");
