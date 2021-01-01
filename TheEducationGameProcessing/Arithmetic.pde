@@ -1,25 +1,23 @@
+/*
+ * Arithmetic.pde
+ *
+ * Description: The arithmetic section. Displays a randomized arithmetic question, taking keyboard inputs as a response
+ *
+ * Authors: Nhi Mai-Do, Steven Kobza
+ *
+*/
+
 class Arithmetic {
-  /* //Steven
-  ArrayList<String> questions = new ArrayList<String>();
-  ArrayList<Integer> answers = new ArrayList<Integer>();
-  String answer = "";
-  int questionLoc;
-  String currentQuestion;
-  */
   
-  //Nhi
+  //question variables
   int addend1;
   int addend2;
   int sum;
-  String answer = "";
+  
+  String answer = ""; //Store user input as a string
   boolean keepGenerating = true;
   
   Arithmetic() {
-    //setupQuestions();
-    /*
-    currentQuestion = selectQuestion();
-    questionLoc = questions.indexOf(currentQuestion);
-    */
   }
   
   void drawMe() {
@@ -27,60 +25,22 @@ class Arithmetic {
     fill(0);
     textSize(92);
     
-    if(keepGenerating == true){
+    if(keepGenerating == true){ //This bool will always be true upon launch. Every time we enter an arithmetic section, we generate a new question
       setupQuestions();
     }
     
-    //Steven: text(currentQuestion + answer, width/3, height/2);
+    //display the question
     text(addend1 + " + " + addend2 + " = " + answer, width/4, height/2);
   }
   
-  /*
-  void chooseNewQuestion() {
-    currentQuestion = selectQuestion();
-    questionLoc = questions.indexOf(currentQuestion);
-  }
-  */
-  
-  int checkInput() {
-    return -1;
-  }
-  
-  /*
-  String selectQuestion() {
-    return randomQuestion();
-  }
-  */
-  
-  void correctAnswer() {
-  }
-  
-  void incorrectAnswer() {
-  }
-  
-  void checkAnswer() {
-    /* Steven
-    try {
-      if (int(answer) == answers.get(questionLoc)) {
-        //changeScene("corr");
-        questionCompleted(true, "math");
-        answer = "";
-      } else {
-        questionCompleted(false, "math");
-        answer = "";
-        //changeScene("inCorr");
-      }
-      chooseNewQuestion();
-    } catch(Exception e) {
-    }
-    */
-    
-    //Nhi
+ 
+  //Description: Checks if user's answer is correct. Concludes the question by calling questionCompleted() and resets variables
+  void checkAnswer() {   
     try{
       if(int(answer) == sum){
         questionCompleted(true, "math");
         answer = "";
-        keepGenerating = true;
+        keepGenerating = true; //we reset this so that it will always be true upon launch
       }
       else {
         questionCompleted(false, "math");
@@ -92,27 +52,15 @@ class Arithmetic {
     
   }
   
-  /*
-  String randomQuestion() {
-    return questions.get(int(random(questions.size())));
-  }
-  */
-  
+  //Description: Generates a randomized addition question
   void setupQuestions() {
-    /*
-    questions.add("4 + 7 = ");
-    questions.add("10 + 11 = ");
-    answers.add(11);
-    answers.add(21);
-    questions.add("18 + 12 = ");
-    answers.add(30);
-    */
-    keepGenerating = false;
-    addend1 = int(random(1, 20));
+    keepGenerating = false; //Once this function is called, we can stop generating questions
+    addend1 = int(random(1, 20)); //Generate the first addend, as a random int between 1 and 20
     addend2 = int(random(1, 20));
     sum = addend1 + addend2;
   }
   
+  //Description: Checks for keyboard input and stores it as the answer
   public void mathKeyPressed(char key) {
     try {
       if ((int(key)) >= 48 && (int(key) <= 57)) { 
