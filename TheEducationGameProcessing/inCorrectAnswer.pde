@@ -1,5 +1,13 @@
+/*
+ * IncorrectAnswer.pde
+ *
+ * Description: Displays a red screen after a question has been answered correctly
+ *
+ * Authors: Steven Kobza
+ *
+*/
+
 class IncorrectAnswer {
-  String previousScene;
   
   void drawMe() {
     background(255, 0, 0);
@@ -10,6 +18,4 @@ class IncorrectAnswer {
     text("You didn't get it right!", width/3 - 40, height/2 + 75);
   }
   
-  void checkInput() {
-  }
 }

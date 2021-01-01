@@ -1,8 +1,14 @@
+/*
+ * CorrectAnswer.pde
+ *
+ * Description: Displays a green screen congratulating the user, after a question has been answered correctly
+ *
+ * Authors: Steven Kobza
+ *
+*/
 class CorrectAnswer {
-  String previousScene;
   
   void drawMe() {
-
     background(0, 255, 0);
     fill(0);
     textSize(150);
@@ -10,11 +16,5 @@ class CorrectAnswer {
     textSize(42);
     text("You got it right!", width/3 + 10, height/2 + 80);
     
-  }
-  void SetPrevSec() {
-    
-  }
-  
-  void checkInput() {
   }
 }
