@@ -115,7 +115,7 @@ class Welcome {
       //Emotion button
       fill(0, 0, 255);
       rect(350, buttonY, buttonWidth, buttonHeight);
-      fill(0);
+      fill(255);
       text("Emotions", 372, buttonY + 35);
       
       //Fine Motor button
