@@ -25,7 +25,7 @@ class FineMotorPhoto{
     targetSeconds = int(random(2, 6));
   }
   
-  //Description: Displays a question prompt an dcounter. Verifies user input and concludes the question by calling questionCompleted() and resetting variables
+  //Description: Displays a question prompt and counter. Verifies user input and concludes the question by calling questionCompleted() and resetting variables
   void drawCounter(){
     
     if(keepGenerating ==true){ //This bool will always be true upon launch. Every time we enter an emotion section, we generate a new question
