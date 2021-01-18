@@ -29,4 +29,6 @@ In the first part of the fine motor section, the user is prompted to turn a knob
 
 In part 2, the user is prompted to place their finger on a light sensor, for a randomized amount of seconds. The timer resets every time the finger is removed. The section concludes after 3 successful attempts. 
 
+## Circuit Diagram and Hardware
+![the education game circuit diagram](Images/circuit-diagram.png)
 
